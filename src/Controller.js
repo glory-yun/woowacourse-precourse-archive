@@ -1,11 +1,12 @@
-import { enterInput, printResult } from "./Views";
-import Calculator from "./Calculator";
+import { enterInput, printResult } from "./Views.js";
+import Calculator from "./Calculator.js";
 
 class Controller {
   // Calculator 인스턴스 생성
   constructor() {
     this.calculator = new Calculator();
   }
+
   /*
   - Controller 실행
   - 입력 -> 계산 -> 출력 
