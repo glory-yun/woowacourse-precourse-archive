@@ -17,6 +17,10 @@ function checkComposedWithNumber(parsedNumberArray) {
   if (parsedNumberArray.some(val => isNaN(parseInt(val))))
     throw new Error("[ERROR] 숫자가 아닌 값으로 이루어져 있습니다.");
 }
+// 배열에 음수가 포함되있는지 검사 
+function checkNegativeNumber(parsedNumberArray) {
+  if (parsedNumberArray.some(val => val < 0))
+    throw new Error("[ERROR] 양수가 입력되어야 합니다.");
+}
 
-
-export { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber }
+export { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber, checkNegativeNumber }
