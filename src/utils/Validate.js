@@ -12,8 +12,11 @@ function validCustomSeparatorType(customSeparator) {
   if (/\d/.test(customSeparator))
     throw new Error("[ERROR] 커스텀 구분자는 문자로 이루어져 있습니다.");
 }
-
 // "," ":"  커스텀 구분자 이외에 다른 문자가 있는지 검사
+function checkComposedWithNumber(parsedNumberArray) {
+  if (parsedNumberArray.every(val => !isNaN(val)))
+    throw new Error("[ERROR] 숫자가 아닌 값으로 이루어져 있습니다.");
+}
 // 배열에 음수가 포함되있는지 검사
 
-export { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType }
+export { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber }
