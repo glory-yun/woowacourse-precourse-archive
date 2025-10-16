@@ -1,6 +1,9 @@
+import { isEmptyInput } from "./utills/Validate.js";
 class Calculator {
   //계산기 계산 실행 함수
   calculate(input) {
+    //빈 문자열인지 검사
+    if (isEmptyInput(input)) return 0;
     const separator = this.#findCustomSeperator(input);
     const parsedNumberArray = this.#parse(input, separator);
     return this.#add(parsedNumberArray);
@@ -15,6 +18,7 @@ class Calculator {
   }
   // 배열의 합 계산
   #add(parsedNumberArray) {
+
   }
 }
 
