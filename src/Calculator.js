@@ -1,4 +1,4 @@
-import { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType } from "./utills/Valid.js";
+import { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType } from "./utils/Validate.js";
 class Calculator {
   //계산기 계산 실행 함수
   calculate(input) {
