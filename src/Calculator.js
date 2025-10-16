@@ -11,7 +11,7 @@ class Calculator {
 
   // 커스텀 구분자 찾기
   #findCustomSeparator(input) {
-    const defaultSeparator = /,|:/;
+    const defaultSeparator = `,|:`;
 
     if (input.startsWith("//")) {
       // "\n" 이 존재하는지 확인
@@ -21,9 +21,9 @@ class Calculator {
       // 커스텀 구분자가 문자인지 검사
       validCustomSeparatorType(customSeparator);
 
-      return [new RegExp(`${defaultSeparator}|${customSeparator}`), separateIndex];
+      return [RegExp(`${defaultSeparator}|${customSeparator}`), separateIndex];
     }
-    return [defaultSeparator, 0];
+    return [RegExp(defaultSeparator), 0];
   }
 
   // 구분자를 기준으로 문자열 분리
@@ -35,7 +35,9 @@ class Calculator {
   }
   // 배열의 합 계산
   #add(parsedNumberArray) {
-
+    checkComposedWithNumber(parsedNumberArray);
+    checkNegativeNumber(parsedNumberArray);
+    return parsedNumberArray.reduce((sum, val) => sum + parseInt(val), 0);
   }
 }
 
