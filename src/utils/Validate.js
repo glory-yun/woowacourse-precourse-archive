@@ -3,9 +3,8 @@ function isEmptyInput(input) {
   return input == "";
 }
 // "//"와 "\n" 사이의 커스텀 구분자가 존재하는지 검사
-function validCustomSeparatorFormat(input) {
-  // "//" 로 시작하지만, "\n" 이 없을 때
-  if (!input.includes("\\n"))
+function validCustomSeparatorFormat(separateIndex) {
+  if (separateIndex === -1)
     throw new Error("[ERROR] 커스텀 구분자를 지정할 수 없습니다.");
 }
 // 커스텀 구분자가 문자인지 아닌지 검사
