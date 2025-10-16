@@ -1,4 +1,4 @@
-import { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType } from "./utils/Validate.js";
+import { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber, checkNegativeNumber } from "./utils/Validate.js";
 class Calculator {
   //계산기 계산 실행 함수
   calculate(input) {
@@ -20,7 +20,6 @@ class Calculator {
       const customSeparator = input.slice(2, separateIndex);
       // 커스텀 구분자가 문자인지 검사
       validCustomSeparatorType(customSeparator);
-
       return [RegExp(`${defaultSeparator}|${customSeparator}`), separateIndex];
     }
     return [RegExp(defaultSeparator), 0];
