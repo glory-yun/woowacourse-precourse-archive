@@ -11,7 +11,7 @@ class Calculator {
 
   // 커스텀 구분자 찾기
   #findCustomSeparator(input) {
-    const defaultSeparator = `,|:`;
+    const defaultSeparator = `\,|\:`;
 
     if (input.startsWith("//")) {
       // "\n" 이 존재하는지 확인
@@ -20,7 +20,7 @@ class Calculator {
       const customSeparator = input.slice(2, separateIndex);
       // 커스텀 구분자가 문자인지 검사
       validCustomSeparatorType(customSeparator);
-      return [RegExp(`${defaultSeparator}|${customSeparator}`), separateIndex];
+      return [RegExp(`${defaultSeparator}|\\${customSeparator}`), separateIndex];
     }
     return [RegExp(defaultSeparator), 0];
   }
