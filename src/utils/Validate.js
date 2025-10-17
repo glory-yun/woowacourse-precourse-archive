@@ -14,7 +14,7 @@ function validCustomSeparatorType(customSeparator) {
 }
 // "," ":"  커스텀 구분자 이외에 다른 문자가 있는지 검사
 function checkComposedWithNumber(parsedNumberArray) {
-  if (parsedNumberArray.some(val => isNaN(parseInt(val))))
+  if (parsedNumberArray.some(val => isNaN(Number(val))))
     throw new Error("[ERROR] 숫자가 아닌 값으로 이루어져 있습니다.");
 }
 // 배열에 음수가 포함되있는지 검사 
