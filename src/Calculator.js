@@ -36,7 +36,7 @@ class Calculator {
   #add(parsedNumberArray) {
     checkComposedWithNumber(parsedNumberArray);
     checkNegativeNumber(parsedNumberArray);
-    return parsedNumberArray.reduce((sum, val) => sum + parseInt(val), 0);
+    return parsedNumberArray.reduce((sum, val) => sum + Number(val), 0);
   }
 }
 
