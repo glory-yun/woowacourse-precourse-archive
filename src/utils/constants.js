@@ -1,1 +1,27 @@
-// 기능 구현 중간 상수 추가
+const VIEWS_MSG = {
+  READ_INPUT: "덧셈할 문자열을 입력해주세요.",
+  PRINT_RESULT: "결과 :",
+};
+
+const CALC_MSG = {
+  EMPTY_INPUT_RESULT: 0,
+  DEFAULT_SEPARATOR: /,|:/,
+  CUSTOM_SEPARATOR_PREFIX: "//",
+  CUSTOM_SEPARATOR_SUFFIX: "\\n",
+  EMPTY_CUSTOM_SEPARATOR: '',
+  PREFIX_LENGTH: 2,
+  SUFFIX_LENGTH: 2,
+  CUSTOM_SEPARATOR_DEFAULT_INDEX: 0,
+  CUSTOM_SEPARATOR_EMPTY_INDEX: 2,
+};
+
+const VALID_MSG = {
+  EMPTY_INPUT: "",
+  INVALID_CUSTOM_SEPARATOR_FORMAT: "[ERROR] 커스텀 구분자를 지정할 수 없습니다.",
+  INVALID_CUSTOM_SEPARATOR_TYPE: "[ERROR] 커스텀 구분자는 숫자가 아닌 문자여야 합니다.",
+  INVALID_NUMBER_FORMAT: "[ERROR] 숫자가 아닌 값으로 이루어져 있습니다.",
+  INVALID_NEGATIVE_NUMBER: "[ERROR] 양수가 입력되어야 합니다.",
+  NOT_FOUND_SUFFIX: -1,
+};
+
+export { VIEWS_MSG, CALC_MSG, VALID_MSG }
