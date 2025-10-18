@@ -13,16 +13,20 @@ class Calculator {
   #findCustomSeparator(input) {
     const defaultSeparator = `\,|\:`;
 
-    if (input.startsWith("//")) {
-      // "\n" 이 존재하는지 확인
-      const separateIndex = input.lastIndexOf("\\n");
-      validCustomSeparatorFormat(separateIndex);
-      const customSeparator = input.slice(2, separateIndex);
-      // 커스텀 구분자가 문자인지 검사
-      validCustomSeparatorType(customSeparator);
-      return [RegExp(`${defaultSeparator}|\\${customSeparator}`), separateIndex];
-    }
-    return [RegExp(defaultSeparator), 0];
+    if (!input.startsWith("//"))
+      return [RegExp(defaultSeparator), 0];
+
+    const separateIndex = input.lastIndexOf("\\n");
+    const customSeparator = input.slice(2, separateIndex);
+
+    // "//"와 "\n" 사이의 커스텀 구분자가 존재하는지 검사
+    validCustomSeparatorFormat(separateIndex);
+
+    if (customSeparator == '')
+      return [RegExp(defaultSeparator), 2];
+    // 커스텀 구분자가 문자인지 검사
+    validCustomSeparatorType(customSeparator);
+    return [RegExp(`${defaultSeparator}|\\${customSeparator}`), separateIndex];
   }
 
   // 구분자를 기준으로 문자열 분리
