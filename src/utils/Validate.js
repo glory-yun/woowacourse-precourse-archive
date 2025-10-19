@@ -1,10 +1,6 @@
 import { VALID_MSG } from "./constants.js";
 
-// 입력받은 문자열이 빈 문자열인지 검사
-function isEmptyInput(input) {
-  return input == VALID_MSG.EMPTY_INPUT;
-}
-// "//"와 "\n" 사이의 커스텀 구분자가 존재하는지 검사
+// 커스텀 구분자의 suffix(\n)가 존재하는지 확인
 function validCustomSeparatorFormat(separateIndex) {
   if (separateIndex === VALID_MSG.NOT_FOUND_SUFFIX)
     throw new Error(VALID_MSG.INVALID_CUSTOM_SEPARATOR_FORMAT);
@@ -25,4 +21,4 @@ function checkNegativeNumber(parsedNumberArray) {
     throw new Error(VALID_MSG.INVALID_NEGATIVE_NUMBER);
 }
 
-export { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber, checkNegativeNumber }
+export { validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber, checkNegativeNumber }

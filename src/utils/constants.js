@@ -4,6 +4,7 @@ const VIEWS_MSG = {
 };
 
 const CALC_MSG = {
+  EMPTY_INPUT: "",
   EMPTY_INPUT_RESULT: 0,
   DEFAULT_SEPARATOR: /,|:/,
   CUSTOM_SEPARATOR_PREFIX: "//",
@@ -16,7 +17,6 @@ const CALC_MSG = {
 };
 
 const VALID_MSG = {
-  EMPTY_INPUT: "",
   INVALID_CUSTOM_SEPARATOR_FORMAT: "[ERROR] 커스텀 구분자를 지정할 수 없습니다.",
   INVALID_CUSTOM_SEPARATOR_TYPE: "[ERROR] 커스텀 구분자는 숫자가 아닌 문자여야 합니다.",
   INVALID_NUMBER_FORMAT: "[ERROR] 숫자가 아닌 값으로 이루어져 있습니다.",

@@ -1,4 +1,4 @@
-import { isEmptyInput, validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber, checkNegativeNumber } from "./utils/Validate.js";
+import { validCustomSeparatorFormat, validCustomSeparatorType, checkComposedWithNumber, checkNegativeNumber } from "./utils/Validate.js";
 import { CALC_MSG } from './utils/constants.js';
 
 /*
@@ -13,7 +13,7 @@ class Calculator {
   //계산기 계산 실행 함수
   calculate(input) {
     //빈 문자열인지 검사
-    if (isEmptyInput(input)) return CALC_MSG.EMPTY_INPUT_RESULT;
+    if (input === CALC_MSG.EMPTY_INPUT) return CALC_MSG.EMPTY_INPUT_RESULT;
     const [separator, separateIndex] = this.#findCustomSeparator(input);
     const parsedNumberArray = this.#parse(input, separator, separateIndex);
     return this.#add(parsedNumberArray);
