@@ -6,6 +6,7 @@ export async function enterInput() {
   const racingCount = await Console.readLineAsync(`시도할 횟수는 몇 회인가요?\n`);
 
   validateEmptyInput(carInput, racingCount);
+  validateRacingCountIsNaN(racingCount);
 
-  return [carInput, racingCount];
+  return [carInput, Number(racingCount)];
 }
