@@ -7,6 +7,7 @@ export async function enterInput() {
 
   validateEmptyInput(carInput, racingCount);
   validateRacingCountIsNaN(racingCount);
+  validateNegativeNumber(racingCount);
 
   return [carInput, Number(racingCount)];
 }
