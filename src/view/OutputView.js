@@ -11,3 +11,8 @@ export function printCurrentRaceResult(currentRaceResult) {
   });
   printLineSpacing();
 }
+
+export function printFinalRacingWinner(finalWinners) {
+  const winners = finalWinners.join(', ');
+  Console.print(`최종 우승자 : ${winners}`);
+}
