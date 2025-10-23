@@ -1,5 +1,9 @@
+import RacingController from './controller/RacingController.js';
+
 class App {
-  async run() {}
+  async run() {
+    await new RacingController().start();
+  }
 }
 
 export default App;
