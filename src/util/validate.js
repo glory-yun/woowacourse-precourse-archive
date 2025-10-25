@@ -4,7 +4,7 @@ export function validateEmptyInput(carInput, racingCount) {
   }
 }
 export function validateRacingCountIsNaN(racingCount) {
-  if (isNaN(racingCount)) {
+  if (isNaN(racingCount) || racingCount.trim() === '') {
     throw new Error("[ERROR] 시도 횟수는 숫자여야 합니다.")
   }
 }
