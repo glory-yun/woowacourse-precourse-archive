@@ -1,4 +1,4 @@
-import { validateEmptyInput, validateRacingCountIsNaN, validateNegativeNumber, validateCarNamesLength } from '../src/util/validate.js';
+import { validateEmptyInput, validateRacingCountIsNaN, validateNegativeNumber, validateCarNamesLength, validateListIsEmpty } from '../src/util/validate.js';
 
 describe('validateEmptyInput test', () => {
   test.each([
@@ -70,6 +70,31 @@ describe('validateCarNamesLength test', () => {
   ])('Validate carNameList : %s', (carNameList) => {
     expect(() => {
       validateCarNamesLength(carNameList);
+    }).not.toThrow('[ERROR]')
+  })
+})
+
+describe('validateListIsEmpty test', () => {
+  test('InValid carNameList : emptyList', () => {
+    const emptyList = []
+    expect(() => {
+      validateListIsEmpty(emptyList);
+    }).toThrow('[ERROR]')
+  })
+
+  test('Valid carNameList : carNameList', () => {
+    const carNameList = ['a', 'glory',]
+    expect(() => {
+      validateListIsEmpty(carNameList);
+    }).not.toThrow('[ERROR]')
+  })
+
+  test.each([
+    [['Name']],
+    [['Name', 'glory']]
+  ])('Valid carNameList : %s', (carNameList) => {
+    expect(() => {
+      validateListIsEmpty(carNameList);
     }).not.toThrow('[ERROR]')
   })
 })
