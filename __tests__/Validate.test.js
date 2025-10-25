@@ -1,4 +1,4 @@
-import { validateEmptyInput } from '../src/util/validate.js';
+import { validateEmptyInput, validateRacingCountIsNaN } from '../src/util/validate.js';
 
 describe('validateEmptyInput test', () => {
   test.each([
@@ -18,6 +18,24 @@ describe('validateEmptyInput test', () => {
   ])('Valid : carName : %s , racingCount : %s', (carName, racingCount) => {
     expect(() => {
       validateEmptyInput(carName, racingCount);
+    }).not.toThrow('[ERROR]')
+  })
+})
+
+describe('validateRacingCountIsNaN test', () => {
+  test.each([
+    'a', '.', '/', '~', '  '
+  ])('InValid : racingCount : %s', (racingCount) => {
+    expect(() => {
+      validateRacingCountIsNaN(racingCount);
+    }).toThrow('[ERROR]')
+  })
+
+  test.each([
+    '-1', '0', '+1', '10'
+  ])('Valid : racingCount : %s', (racingCount) => {
+    expect(() => {
+      validateRacingCountIsNaN(racingCount);
     }).not.toThrow('[ERROR]')
   })
 })
