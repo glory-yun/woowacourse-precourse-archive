@@ -13,7 +13,7 @@ export function validateNegativeNumber(racingCount) {
     throw new Error("[ERROR] 시도 횟수는 음수일 수 없습니다.")
   }
 }
-export function validateCarName(carNameList) {
+export function validateCarNamesLength(carNameList) {
   if (carNameList.some(carName => carName.length > 5)) {
     throw new Error("[ERROR] 자동차 이름은 5글자 이하여야 합니다.")
   }
