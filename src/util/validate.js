@@ -1,5 +1,5 @@
 export function validateEmptyInput(carInput, racingCount) {
-  if (carInput === '' || racingCount == '') {
+  if (carInput === '' || racingCount === '') {
     throw new Error("[ERROR] 자동차 이름과 시도할 횟수를 모두 입력해야 합니다.")
   }
 }
