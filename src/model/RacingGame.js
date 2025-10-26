@@ -1,5 +1,5 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import { findRacingWinners } from '../util/findRacingWinners.js';
+import { pickRandomNumber } from '../util/pickRandomNumber.js';
 
 class RacingGame {
   #Cars;
@@ -10,7 +10,7 @@ class RacingGame {
 
   #race() {
     this.#Cars.forEach((car) => {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(0, 9);
+      const randomNumber = pickRandomNumber();
       if (randomNumber >= 4) {
         car.move();
       }
