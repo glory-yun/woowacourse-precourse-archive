@@ -1,15 +1,14 @@
 //Racing 객체 테스트
 import Car from '../src/model/Car.js';
 import RacingGame from '../src/model/RacingGame.js';
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { pickRandomNumber } from '../src/util/pickRandomNumber.js';
 
 //가짜 난수 사용
+jest.mock('../src/util/pickRandomNumber.js');
 const mockRace = (randomNumbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
-
   randomNumbers.reduce((acc, randomNumber) => {
     return acc.mockReturnValueOnce(randomNumber);
-  }, MissionUtils.Random.pickNumberInRange);
+  }, pickRandomNumber);
 };
 
 describe('RacingGame', () => {
@@ -17,34 +16,38 @@ describe('RacingGame', () => {
   const cars = [new Car('a'), new Car('b'), new Car('c')];
   const racingGame = new RacingGame(cars);
 
-  //난수 생성 테스트
-  test('난수 생성 테스트(0~9 사이의 정수를 생성하는지)', () => {
-    const randomNumber = MissionUtils.Random.pickNumberInRange(0, 9);
-    expect(0 <= randomNumber && randomNumber <= 9).toBe(true);
+  test('getWinners() : 최종 우승자를 반환', () => {
+    const finalWinners = racingGame.getWinners();
+    //0번 경주 : 모두 우승자
+    expect(finalWinners).toEqual(['a', 'b', 'c'])
   })
 
-  //race 결과를 반환하는 테스트
-  test('getRacingResult() : Racing 결과 테스트 반환', () => {
-    expect(racingGame.getRacingResult()).toEqual([
-      { "carName": "a", "position": 0 },
-      { "carName": "b", "position": 0 },
-      { "carName": "c", "position": 0 }
-    ])
-  })
-
-  //race 테스트
-  test('race() : 난수에 따라 car를 움직임', () => {
+  test('play() : racingCount만큼 race하고, 모든 결과를 배열로 반환', () => {
     // 가짜로 난수 집어넣기. 총 3번 생성.
     const MOVING_FORWARD = 9;
     const STOP = 0;
-    mockRace([MOVING_FORWARD, STOP, MOVING_FORWARD]);
+    mockRace([
+      MOVING_FORWARD, STOP, MOVING_FORWARD,
+      STOP, MOVING_FORWARD, MOVING_FORWARD,
+    ]);
 
-    racingGame.race();
+    const expectResult = [
+      [ // 1라운드
+        { "carName": "a", "position": 1 },
+        { "carName": "b", "position": 0 },
+        { "carName": "c", "position": 1 }
+      ],
+      [ // 2라운드
+        { "carName": "a", "position": 1 },
+        { "carName": "b", "position": 1 },
+        { "carName": "c", "position": 2 }
+      ]
+    ]
 
-    expect(racingGame.getRacingResult()).toEqual([
-      { "carName": "a", "position": 1 },
-      { "carName": "b", "position": 0 },
-      { "carName": "c", "position": 1 }
-    ])
+    racingCount = 2;
+    const allRacingResult = racingGame.play(racingCount);
+
+    expect(allRacingResult).toEqual(expectResult)
   })
+
 });
