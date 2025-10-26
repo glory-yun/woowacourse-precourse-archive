@@ -21,3 +21,7 @@ export function printFinalRacingWinner(finalWinners) {
   const winners = finalWinners.join(', ');
   Console.print(`${FINAL_WINNERS}${winners}`);
 }
+
+export function printError(errorMessage) {
+  Console.print(errorMessage);
+}
