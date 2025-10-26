@@ -1,0 +1,1 @@
+export const PLAY_RESULT = '\n실행결과';

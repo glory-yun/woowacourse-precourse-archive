@@ -1,5 +1,10 @@
 import { enterInput } from "../view/InputView.js";
-import { printCurrentRaceResult, printLineSpacing, printFinalRacingWinner } from "../view/OutputView.js";
+import {
+  printCurrentRaceResult,
+  printLineSpacing,
+  printFinalRacingWinner
+} from "../view/OutputView.js";
+import { PLAY_RESULT } from "../constants/RacingControllerConstants.js";
 import { parseCarName } from "../util/parser.js"
 import Car from '../model/Car.js';
 import RacingGame from '../model/RacingGame.js';
@@ -17,7 +22,7 @@ class RacingController {
     const racingGame = new RacingGame(cars);
 
     //racingCount만큼 자동차들을 race 후 그 결과 출력하기
-    printLineSpacing('\n실행결과')
+    printLineSpacing(PLAY_RESULT);
     const allRacingResult = racingGame.play(racingCount);
     allRacingResult.forEach(result => printCurrentRaceResult(result));
 

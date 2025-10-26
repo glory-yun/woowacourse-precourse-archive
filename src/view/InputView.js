@@ -1,9 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateRacingCountIsNaN, validateNegativeNumber } from '../util/validate.js';
+import { READ_INPUT, READ_COUNT } from '../constants/InputViewConstants.js';
 
 export async function enterInput() {
-  const carInput = await Console.readLineAsync(`경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)\n`);
-  const racingCount = await Console.readLineAsync(`시도할 횟수는 몇 회인가요?\n`);
+  const carInput = await Console.readLineAsync(`${READ_INPUT}\n`);
+  const racingCount = await Console.readLineAsync(`${READ_COUNT}\n`);
 
   validateEmptyInput(carInput, racingCount);
   validateRacingCountIsNaN(racingCount);

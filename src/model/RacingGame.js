@@ -1,5 +1,6 @@
 import { findRacingWinners } from '../util/findRacingWinners.js';
 import { pickRandomNumber } from '../util/pickRandomNumber.js';
+import { FORWARD_CONDITION } from '../constants/RacingGameConstants.js';
 
 class RacingGame {
   #Cars;
@@ -11,7 +12,7 @@ class RacingGame {
   #race() {
     this.#Cars.forEach((car) => {
       const randomNumber = pickRandomNumber();
-      if (randomNumber >= 4) {
+      if (randomNumber >= FORWARD_CONDITION) {
         car.move();
       }
     });
