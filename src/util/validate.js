@@ -4,7 +4,7 @@ import {
   ERROR_NEGATIVE_NUMBER,
   ERROR_NAME_LENGTH_OVER,
   ERROR_NO_CARS
-} from "../constants/validateConstants"
+} from "../constants/validateConstants.js"
 
 export function validateEmptyInput(carInput, racingCount) {
   if (carInput === '' || racingCount === '') {
