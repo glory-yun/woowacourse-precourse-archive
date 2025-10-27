@@ -1,4 +1,3 @@
-import { findRacingWinners } from '../util/findRacingWinners.js';
 import { pickRandomNumber } from '../util/pickRandomNumber.js';
 import { FORWARD_CONDITION } from '../constants/RacingGameConstants.js';
 
@@ -37,7 +36,13 @@ class RacingGame {
 
   getWinners() {
     const finalResult = this.#getRacingResult();
-    return findRacingWinners(finalResult);
+
+    const carsPositionResult = finalResult.map(result => result.position);
+    const bestPosition = Math.max(...carsPositionResult);
+    const winners = finalResult.filter(result => result.position === bestPosition);
+    const winnersName = winners.map(winner => winner.carName);
+
+    return winnersName;
   }
 }
 
