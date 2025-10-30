@@ -24,11 +24,11 @@ describe("로또 클래스 테스트", () => {
   });
 
   test.each([
-    { description: '1 이하인 숫자가 있으면', numbers: [0, 1, 2, 3, 4, 5] },
-    { description: '45 이상인 숫자가 있으면', numbers: [1, 2, 3, 4, 5, 45] },
-  ])('로또 번호가 $description 예외가 발생한다.', ({ numbers }) => {
+    { description: '0 이하인 숫자가 있으면', number: 0 },
+    { description: '46 이상인 숫자가 있으면', number: 46 },
+  ])('로또 번호가 $description 예외가 발생한다.', ({ number }) => {
     expect(() => {
-      new Lotto(numbers);
+      new Lotto(number);
     }).toThrow("[ERROR]")
   })
 
