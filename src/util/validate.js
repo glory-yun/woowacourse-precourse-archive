@@ -39,3 +39,19 @@ export function validateDivideThousand(input) {
     throw new Error("[ERROR] 입력 금액은 1000원 나누어 떨어져야합니다.");
   }
 }
+
+export function validateNumbers(numbers) {
+  validateNumbersLength(numbers);
+  validateNumbersDuplicate(numbers);
+  numbers.forEach(number => {
+    validateIsInteger(number);
+    validateRange(number);
+  })
+}
+
+export function validateLottoWinningNumbers(winningNumbers, bonusNumber) {
+  validateNumbers(winningNumbers);
+  validateIsIncludeNumber(winningNumbers, bonusNumber);
+  validateIsInteger(bonusNumber);
+  validateRange(bonusNumber);
+}

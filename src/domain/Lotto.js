@@ -1,25 +1,13 @@
 import {
-  validateIsInteger,
-  validateNumbersLength,
-  validateNumbersDuplicate,
-  validateRange
+  validateNumbers
 } from "../util/validate.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    validateNumbers(numbers)
     this.#numbers = numbers;
-  }
-
-  #validate(numbers) {
-    validateNumbersLength(numbers);
-    validateNumbersDuplicate(numbers);
-    numbers.forEach(number => {
-      validateIsInteger(number);
-      validateRange(number);
-    });
   }
 
   getNumbers() {
