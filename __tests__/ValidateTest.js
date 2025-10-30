@@ -3,7 +3,9 @@ import {
   validateIsInteger,
   validateNumbersLength,
   validateNumbersDuplicate,
-  validateRange
+  validateRange,
+  validateIsIncludeNumber,
+  validateDivideThousand
 } from "../src/util/validate.js";
 
 describe('Validate 테스트', () => {
@@ -43,6 +45,21 @@ describe('Validate 테스트', () => {
     }).toThrow("[ERROR]")
   })
 
+  test('보너스 번호가 당첨번호와 중복될 경우 예외가 발생한다.', () => {
+    expect(() => {
+      const numbers = [1, 2, 3, 4, 5, 6];
+      const input = 1;
+      validateIsIncludeNumber(numbers, input);
+    }).toThrow("[ERROR]")
+  })
+
+  test('로또 구입 금액은 1000으로 나누어 떨어져야한다.', () => {
+    expect(() => {
+      const price = 2500;
+      validateDivideThousand(price);
+    }).toThrow("[ERROR]")
+  })
+
   test('성공적으로 검증에 통과했다.', () => {
     expect(() => {
       validateInputIsEmpty('1,2,3');
@@ -50,6 +67,8 @@ describe('Validate 테스트', () => {
       validateNumbersLength([1, 2, 3, 4, 5, 6]);
       validateNumbersDuplicate([1, 2, 3, 4, 5, 6]);
       validateRange(1);
+      validateIsIncludeNumber([1, 2, 3, 4, 5, 6], 7);
+      validateDivideThousand(2000);
     }).not.toThrow();
   });
 })
