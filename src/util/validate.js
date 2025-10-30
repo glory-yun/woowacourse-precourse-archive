@@ -28,3 +28,14 @@ export function validateRange(input) {
   }
 }
 
+export function validateIsIncludeNumber(numbers, input) {
+  if (numbers.includes(input)) {
+    throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+  }
+}
+
+export function validateDivideThousand(input) {
+  if (Number(input) % 1000) {
+    throw new Error("[ERROR] 입력 금액은 1000원 나누어 떨어져야합니다.");
+  }
+}
