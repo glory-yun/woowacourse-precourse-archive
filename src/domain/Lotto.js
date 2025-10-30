@@ -1,3 +1,10 @@
+import {
+  validateIsInteger,
+  validateNumbersLength,
+  validateNumbersDuplicate,
+  validateRange
+} from "../util/validate.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +14,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    validateNumbersLength(numbers);
+    validateNumbersDuplicate(numbers);
+    numbers.forEach(number => {
+      validateIsInteger(number);
+      validateRange(number);
+    });
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
