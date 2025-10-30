@@ -6,12 +6,13 @@ describe('Validate 테스트', () => {
     }).toThrow("[ERROR]")
   })
 
-  test('입력된 숫자들에 문자가 있을 경우 예외가 발생한다.', () => {
-    expect(() => {
-      const input = '123a';
-      validateIsNumber(input);
-    }).toThrow("[ERROR]")
-  })
+  test.each([
+    { input: '123a' },
+    { input: '12.3' },
+    { input: 'abc' }
+  ])('입력된 문자가 정수가 아닐 경우 예외가 발생한다. input : $input', ({ input }) => {
+    expect(() => validateIsInteger(input)).toThrow('[ERROR]');
+  });
 
   test('뽑힌 숫자들이 6개가 아닌경우 예외가 발생한다.', () => {
     expect(() => {
