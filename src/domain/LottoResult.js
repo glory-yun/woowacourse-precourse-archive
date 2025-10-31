@@ -1,3 +1,5 @@
+import { MATCH_PRICE, MATCH_KEYS } from "../util/lottoConstants.js";
+
 class LottoResult {
   #matchResult
 
@@ -5,25 +7,27 @@ class LottoResult {
     this.#matchResult = matchResult;
   }
 
-  calculateRateOfReturn(purchaseAmount) {
-    const matchPrice = {
-      'matchThree': 5000,
-      'matchFour': 50000,
-      'matchOnlyFive': 1500000,
-      'matchFiveAndBonus': 30000000,
-      'matchSix': 2000000000
-    };
-    const matchResultKeys = Object.keys(this.#matchResult);
-
+  #calculateTotalReturn(matchPrice, matchResultKeys) {
     const totalReturn = matchResultKeys.reduce((total, matchKey) => {
-      const matchResultPrice = matchPrice[matchKey]; // 당첨 개수의 상금
-      const matchCount = this.#matchResult[matchKey]; // 당첨된 티켓 수
+      // 당첨 개수의 상금
+      const matchResultPrice = matchPrice[matchKey];
+      // 당첨된 티켓 수
+      const matchCount = this.#matchResult[matchKey];
       return total + (matchResultPrice * matchCount);
     }, 0);
 
-    const RateOfResult = Math.round((totalReturn * 1000) / purchaseAmount) / 10;
+    return totalReturn;
+  }
 
-    return RateOfResult;
+  calculateRateOfReturn(purchaseAmount) {
+
+    const matchPrice = MATCH_PRICE;
+    const matchResultKeys = MATCH_KEYS;
+
+    const totalReturn = this.#calculateTotalReturn(matchPrice, matchResultKeys);
+    const rateOfResult = Math.round((totalReturn * 1000) / purchaseAmount) / 10;
+
+    return rateOfResult;
   }
 
   getMatchResult() {
