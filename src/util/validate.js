@@ -55,3 +55,9 @@ export function validateLottoWinningNumbers(winningNumbers, bonusNumber) {
   validateIsInteger(bonusNumber);
   validateRange(bonusNumber);
 }
+
+export function validatePurchaseAmount(input) {
+  validateInputIsEmpty(input);
+  validateIsInteger(input);
+  validateDivideThousand(input);
+}
