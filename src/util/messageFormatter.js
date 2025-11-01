@@ -1,5 +1,5 @@
 import { MATCH_COUNT_KEYS, MATCH_MESSAGE } from "./lottoConstants.js";
-import { formatRateOfResult } from "./formatter.js";
+import { formatRateOfResult } from "./rateFormatter.js";
 
 export function getLottoNumbersMessage(numbers) {
   return `[${numbers.join(', ')}]`;
