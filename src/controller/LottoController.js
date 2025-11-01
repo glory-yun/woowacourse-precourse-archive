@@ -1,85 +1,34 @@
 import {
-  readPurchaseAmount,
-  readWinningNumbers,
-  readBonusNumbers
-} from "../view/InputView.js";
-import {
-  validatePurchaseAmount,
-} from "../util/validate.js";
-import {
   printLottoResult,
   printLottos,
   printPurchaseAmount,
-  printError
 } from "../view/OutputView.js";
 import LottoManager from "../service/LottoManager.js";
-import { parser } from "../util/parser.js";
-
+import InputProcessor from "./InputProcessor.js";
 
 class LottoController {
-  #lottoManager;
+  #inputProcessor;
 
   constructor() {
-    this.#lottoManager = new LottoManager();
+    const lottoManager = new LottoManager();
+    this.#inputProcessor = new InputProcessor(lottoManager);
   }
 
   async start() {
-    //검증된 로또 객체를 생성
-    const purchaseAmount = await this.#getValidPurchaseAmount();
-    const lottos = this.#getValidLottos(purchaseAmount);
+    // 로또 구매 및 생성
+    const purchaseAmount = await this.#inputProcessor.getPurchaseAmount();
+    const lottos = this.#inputProcessor.createLottos(purchaseAmount);
     printPurchaseAmount(purchaseAmount);
     printLottos(lottos);
 
-    //검증된 당첨번호, 보너스번호가 있는 객체 생성
-    const lottoWinningNumbers = await this.#getValidLottoWinningNumbers();
+    // 당첨 번호 처리
+    const lottoWinningNumbers = await this.#inputProcessor.createWinningNumbers();
 
-    //검증된 로또 결과 객체 생성
-    const lottoResult = this.#getValidLottoResult(lottos, lottoWinningNumbers);
-
-    //당첨 결과 출력 
+    // 결과 계산 및 출력
+    const lottoResult = this.#inputProcessor.createResult(lottos, lottoWinningNumbers);
     const matchResult = lottoResult.getMatchResult();
     const rateOfResult = lottoResult.calculateRateOfReturn(purchaseAmount);
     printLottoResult(matchResult, rateOfResult);
-  }
-
-  async #getValidPurchaseAmount() {
-    while (true) {
-      try {
-        const purchaseAmount = await readPurchaseAmount();
-        validatePurchaseAmount(purchaseAmount);
-        return Number(purchaseAmount);
-      }
-      catch (error) {
-        printError(error.message);
-      }
-    }
-  }
-
-  #getValidLottos(purchaseAmount) {
-    const lottos = this.#lottoManager.createLotto(purchaseAmount);
-    return lottos
-  }
-
-  async #getValidLottoWinningNumbers() {
-    while (true) {
-      try {
-        const winningNumbers = await readWinningNumbers();
-
-        const parseWinningNumbers = parser(winningNumbers);
-        const bonusNumber = await readBonusNumbers();
-        const lottoWinningNumbers = this.#lottoManager.createLottoWinningNumbers(parseWinningNumbers, Number(bonusNumber));
-
-        return lottoWinningNumbers;
-      }
-      catch (error) {
-        printError(error.message);
-      }
-    }
-  }
-
-  #getValidLottoResult(lottos, lottoWinningNumbers) {
-    const lottoResult = this.#lottoManager.createLottoResult(lottos, lottoWinningNumbers);
-    return lottoResult
   }
 }
 
