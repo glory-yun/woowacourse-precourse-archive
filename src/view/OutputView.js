@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MATCH_COUNT_KEYS, MATCH_MESSAGES } from "../util/lottoConstants.js";
+import { MATCH_COUNT_KEYS, MATCH_MESSAGE } from "../util/lottoConstants.js";
 import { formatRateOfResult } from "../util/formatter.js";
 
 export function printPurchaseAmount(purchaseAmount) {
@@ -9,7 +9,8 @@ export function printPurchaseAmount(purchaseAmount) {
 
 export function printLottos(lottos) {
   lottos.forEach(lotto => {
-    Console.print(lotto.getNumbers());
+    const numbers = lotto.getNumbers()
+    Console.print(`[${numbers.join(', ')}]`);
   });
 }
 
@@ -18,7 +19,7 @@ export function printLottoResult(matchResult, rateOfResult) {
   Console.print('---');
 
   MATCH_COUNT_KEYS.forEach(matchKey => {
-    const matchMessage = MATCH_MESSAGES[matchKey];
+    const matchMessage = MATCH_MESSAGE[matchKey];
     const matchCount = matchResult[matchKey];
     Console.print(`${matchMessage}${matchCount}개`);
   })
