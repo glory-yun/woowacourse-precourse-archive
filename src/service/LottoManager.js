@@ -1,8 +1,8 @@
 import Lotto from "../domain/Lotto.js";
 import LottoWinningNumbers from "../domain/LottoWinningNumbers.js";
 import LottoResult from "../domain/LottoResult.js";
-import { MATCH_COUNT_KEYS, MATCH_COUNT } from "../util/lottoConstants.js";
 import { pickUniqueNumbers } from "../util/pickUniqueNumbrers.js";
+import { calculateLottoResult } from "./LottoResultCalculator.js";
 
 class LottoManager {
   createLotto(purchaseAmount) {
@@ -20,44 +20,8 @@ class LottoManager {
   }
 
   createLottoResult(lottos, lottoWinningNumbers) {
-    const lottoResult = this.#calculateLottoResult(lottos, lottoWinningNumbers);
+    const lottoResult = calculateLottoResult(lottos, lottoWinningNumbers);
     return new LottoResult(lottoResult);
-  }
-
-  //lottoResult 계산 함수들
-  #calculateLottoResult(lottos, lottoWinningNumbers) {
-    const { winningNumbers, bonusNumber } = lottoWinningNumbers.getLottoWinningNumbers();
-    const matchResult = {};
-    MATCH_COUNT_KEYS.forEach(key => matchResult[key] = 0);
-
-    lottos.forEach(lotto => {
-      const lottoNumbers = lotto.getNumbers();
-      const matchCount = this.#getMatchCount(lottoNumbers, winningNumbers);
-      const isMatchBonusNumber = this.#isMatchBonusNumber(lottoNumbers, bonusNumber);
-
-      const matchCountKey = this.#getMatchKey(matchCount, isMatchBonusNumber);
-      if (matchCountKey) matchResult[matchCountKey]++;
-    });
-    return matchResult;
-  }
-
-  #getMatchCount(lottoNumbers, winningNumbers) {
-    const matchNumbers = lottoNumbers.filter(number => winningNumbers.includes(number));
-    return matchNumbers.length;
-  }
-
-  #isMatchBonusNumber(lottoNumbers, bonusNumber) {
-    return lottoNumbers.includes(bonusNumber);
-  }
-
-  #getMatchKey(matchCount, isBonusMatch) {
-    if (matchCount === MATCH_COUNT.MATCH_SIX) return 'MATCH_SIX';
-    if (matchCount === MATCH_COUNT.MATCH_FIVE_AND_BONUS && isBonusMatch) return 'MATCH_FIVE_AND_BONUS';
-    if (matchCount === MATCH_COUNT.MATCH_ONLY_FIVE) return 'MATCH_ONLY_FIVE';
-    if (matchCount === MATCH_COUNT.MATCH_FOUR) return 'MATCH_FOUR';
-    if (matchCount === MATCH_COUNT.MATCH_THREE) return 'MATCH_THREE';
-
-    return null;
   }
 }
 
