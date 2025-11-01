@@ -5,7 +5,7 @@ export async function readPurchaseAmount() {
 }
 
 export async function readWinningNumbers() {
-  return Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+  return Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
 }
 
 export async function readBonusNumbers() {
