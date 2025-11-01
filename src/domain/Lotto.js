@@ -7,7 +7,7 @@ class Lotto {
 
   constructor(numbers) {
     validateNumbers(numbers)
-    this.#numbers = numbers;
+    this.#numbers = [...numbers].sort((a, b) => a - b);
   }
 
   getNumbers() {
