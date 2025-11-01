@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MATCH_COUNT_KEYS, MATCH_COUNT_PRICE, MATCH_COUNT } from "../util/lottoConstants.js";
-import { formatMatchPrice, formatRateOfResult } from "../util/formatter.js";
+import { MATCH_COUNT_KEYS, MATCH_MESSAGES } from "../util/lottoConstants.js";
+import { formatRateOfResult } from "../util/formatter.js";
 
 export function printPurchaseAmount(purchaseAmount) {
   const ticketsCount = purchaseAmount / 1000;
@@ -18,10 +18,9 @@ export function printLottoResult(matchResult, rateOfResult) {
   Console.print('---');
 
   MATCH_COUNT_KEYS.forEach(matchKey => {
-    const matchText = `${MATCH_COUNT[matchKey]}개 일치 `;
-    const matchPrice = formatMatchPrice(MATCH_COUNT_PRICE[matchKey])
+    const matchMessage = MATCH_MESSAGES[matchKey];
     const matchCount = matchResult[matchKey];
-    Console.print(`${matchText}(${matchPrice}원) - ${matchCount}개`);
+    Console.print(`${matchMessage}${matchCount}개`);
   })
 
   const result = formatRateOfResult(rateOfResult);
