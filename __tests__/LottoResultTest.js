@@ -2,11 +2,11 @@ import LottoResult from "../src/domain/LottoResult.js"
 
 describe('LottoResult 클래스 테스트', () => {
   const matchResult = {
-    'matchThree': 1,
-    'matchFour': 0,
-    'matchOnlyFive': 0,
-    'matchFiveAndBonus': 0,
-    'matchSix': 0
+    MATCH_THREE: 1,
+    MATCH_FOUR: 0,
+    MATCH_ONLY_FIVE: 0,
+    MATCH_FIVE_AND_BONUS: 0,
+    MATCH_SIX: 0
   }
   const lottoResult = new LottoResult(matchResult)
 
