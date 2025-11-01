@@ -32,14 +32,12 @@ class LottoManager {
 
     lottos.forEach(lotto => {
       const lottoNumbers = lotto.getNumbers();
-
       const matchCount = this.#getMatchCount(lottoNumbers, winningNumbers);
       const isMatchBonusNumber = this.#isMatchBonusNumber(lottoNumbers, bonusNumber);
 
       const matchCountKey = this.#getMatchKey(matchCount, isMatchBonusNumber);
       if (matchCountKey) matchResult[matchCountKey]++;
     });
-
     return matchResult;
   }
 
@@ -53,11 +51,11 @@ class LottoManager {
   }
 
   #getMatchKey(matchCount, isBonusMatch) {
-    if (matchCount === 6) return MATCH_COUNT.SIX;
-    if (matchCount === 5 && isBonusMatch) return MATCH_COUNT.FIVE_AND_BONUS;
-    if (matchCount === 5) return MATCH_COUNT.ONLY_FIVE;
-    if (matchCount === 4) return MATCH_COUNT.FOUR;
-    if (matchCount === 3) return MATCH_COUNT.THREE;
+    if (matchCount === MATCH_COUNT.MATCH_SIX) return 'MATCH_SIX';
+    if (matchCount === MATCH_COUNT.MATCH_FIVE_AND_BONUS && isBonusMatch) return 'MATCH_FIVE_AND_BONUS';
+    if (matchCount === MATCH_COUNT.MATCH_ONLY_FIVE) return 'MATCH_ONLY_FIVE';
+    if (matchCount === MATCH_COUNT.MATCH_FOUR) return 'MATCH_FOUR';
+    if (matchCount === MATCH_COUNT.MATCH_THREE) return 'MATCH_THREE';
 
     return null;
   }

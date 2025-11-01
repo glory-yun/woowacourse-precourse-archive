@@ -57,11 +57,11 @@ describe('LottoManager 클래스 테스트', () => {
 
     test("결과로, 6개 일치 1개, 3개 일치 1개를 반환한다.", () => {
       const testResult = {
-        matchThree: 1,
-        matchFour: 0,
-        matchOnlyFive: 0,
-        matchFiveAndBonus: 0,
-        matchSix: 1
+        MATCH_THREE: 1,
+        MATCH_FOUR: 0,
+        MATCH_ONLY_FIVE: 0,
+        MATCH_FIVE_AND_BONUS: 0,
+        MATCH_SIX: 1
       };
       expect(lottoResult.getMatchResult()).toEqual(testResult);
     })
@@ -69,11 +69,11 @@ describe('LottoManager 클래스 테스트', () => {
 
   describe("로또 당첨 결과를 바탕으로 LottoResult 객체를 생성한다.", () => {
     const matchResult = {
-      matchThree: 1,
-      matchFour: 0,
-      matchOnlyFive: 0,
-      matchFiveAndBonus: 0,
-      matchSix: 0,
+      MATCH_THREE: 1,
+      MATCH_FOUR: 0,
+      MATCH_ONLY_FIVE: 0,
+      MATCH_FIVE_AND_BONUS: 0,
+      MATCH_SIX: 0
     };
     //LottoResult 객체 생성
     const lottoResult = new LottoResult(matchResult);

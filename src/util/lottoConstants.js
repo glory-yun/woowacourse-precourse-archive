@@ -1,10 +1,22 @@
-export const MATCH_PRICE = Object.freeze({
-  'matchThree': 5000,
-  'matchFour': 50000,
-  'matchOnlyFive': 1500000,
-  'matchFiveAndBonus': 30000000,
-  'matchSix': 2000000000
+export const MATCH_COUNT = Object.freeze({
+  MATCH_THREE: 3,
+  MATCH_FOUR: 4,
+  MATCH_ONLY_FIVE: 5,
+  MATCH_FIVE_AND_BONUS: 5,
+  MATCH_SIX: 6
 });
 
-export const MATCH_KEYS = Object.keys(MATCH_PRICE);
+export const MATCH_COUNT_PRICE = Object.freeze({
+  MATCH_THREE: 5000,
+  MATCH_FOUR: 50000,
+  MATCH_ONLY_FIVE: 1500000,
+  MATCH_FIVE_AND_BONUS: 30000000,
+  MATCH_SIX: 2000000000
+});
+
+export const MATCH_COUNT_KEYS = Object.keys(MATCH_COUNT_PRICE);
+
+
+
+
 
