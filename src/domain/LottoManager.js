@@ -1,15 +1,15 @@
-import { Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import LottoWinningNumbers from "./LottoWinningNumbers.js";
 import LottoResult from "./LottoResult.js";
-import { MATCH_KEYS } from "../util/lottoConstants.js";
+import { MATCH_COUNT_KEYS, MATCH_COUNT } from "../util/lottoConstants.js";
+import { pickUniqueNumbers } from "../util/pickUniqueNumbrers.js";
 
 class LottoManager {
   createLotto(purchaseAmount) {
     const ticketsCount = purchaseAmount / 1000;
     const lottos = [];
     for (let count = 0; count < ticketsCount; count++) {
-      const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const randomNumbers = pickUniqueNumbers();
       lottos.push(new Lotto(randomNumbers));
     }
     return lottos;
@@ -28,7 +28,7 @@ class LottoManager {
   #calculateLottoResult(lottos, lottoWinningNumbers) {
     const { winningNumbers, bonusNumber } = lottoWinningNumbers.getLottoWinningNumbers();
     const matchResult = {};
-    MATCH_KEYS.forEach(key => matchResult[key] = 0);
+    MATCH_COUNT_KEYS.forEach(key => matchResult[key] = 0);
 
     lottos.forEach(lotto => {
       const lottoNumbers = lotto.getNumbers();
@@ -36,8 +36,8 @@ class LottoManager {
       const matchCount = this.#getMatchCount(lottoNumbers, winningNumbers);
       const isMatchBonusNumber = this.#isMatchBonusNumber(lottoNumbers, bonusNumber);
 
-      const matchKey = this.#getMatchKey(matchCount, isMatchBonusNumber);
-      if (matchKey) matchResult[matchKey]++;
+      const matchCountKey = this.#getMatchKey(matchCount, isMatchBonusNumber);
+      if (matchCountKey) matchResult[matchCountKey]++;
     });
 
     return matchResult;
@@ -53,11 +53,11 @@ class LottoManager {
   }
 
   #getMatchKey(matchCount, isBonusMatch) {
-    if (matchCount === 6) return "matchSix";
-    if (matchCount === 5 && isBonusMatch) return "matchFiveAndBonus";
-    if (matchCount === 5) return "matchOnlyFive";
-    if (matchCount === 4) return "matchFour";
-    if (matchCount === 3) return "matchThree";
+    if (matchCount === 6) return MATCH_COUNT.SIX;
+    if (matchCount === 5 && isBonusMatch) return MATCH_COUNT.FIVE_AND_BONUS;
+    if (matchCount === 5) return MATCH_COUNT.ONLY_FIVE;
+    if (matchCount === 4) return MATCH_COUNT.FOUR;
+    if (matchCount === 3) return MATCH_COUNT.THREE;
 
     return null;
   }
