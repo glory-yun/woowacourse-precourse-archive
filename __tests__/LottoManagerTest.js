@@ -1,4 +1,4 @@
-import LottoManager from "../src/domain/LottoManager.js";
+import LottoManager from "../src/service/LottoManager.js";
 import Lotto from "../src/domain/Lotto.js";
 import LottoResult from "../src/domain/LottoResult.js";
 import LottoWinningNumbers from "../src/domain/LottoWinningNumbers.js";
