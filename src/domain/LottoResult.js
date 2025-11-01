@@ -8,7 +8,7 @@ class LottoResult {
   }
 
   getMatchResult() {
-    return this.#matchResult;
+    return { ...this.#matchResult };
   }
 
   calculateRateOfReturn(purchaseAmount) {
