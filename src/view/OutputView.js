@@ -1,9 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
 import { getLottoNumbersMessage, getLottoResultMessages } from "../util/messageFormatter.js";
+import { LOTTO_PRICE } from "../util/constants/valuesConstants.js";
+import { OUTPUT_MESSAGES } from "../util/constants/messagesConstants.js";
 
 export function printPurchaseAmount(purchaseAmount) {
-  const ticketsCount = purchaseAmount / 1000;
-  Console.print(`\n${ticketsCount}개를 구매했습니다.`);
+  const ticketsCount = purchaseAmount / LOTTO_PRICE;
+  Console.print(OUTPUT_MESSAGES.PURCHASE_COUNT(ticketsCount));
 }
 
 export function printLottos(lottos) {

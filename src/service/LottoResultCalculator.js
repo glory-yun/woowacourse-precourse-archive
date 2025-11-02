@@ -1,4 +1,4 @@
-import { MATCH_COUNT_KEYS, MATCH_COUNT } from "../util/lottoConstants.js";
+import { MATCH_COUNT_KEYS, MATCH_COUNT } from "../util/constants/lottoConstants.js";
 
 export function calculateLottoResult(lottos, lottoWinningNumbers) {
   const { winningNumbers, bonusNumber } = lottoWinningNumbers.getLottoWinningNumbers();

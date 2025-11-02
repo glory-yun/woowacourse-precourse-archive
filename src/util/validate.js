@@ -1,42 +1,51 @@
+import { ERROR_MESSAGES } from '../util/constants/errorConstants.js';
+import {
+  LOTTO_NUMBER_COUNT,
+  MIN_LOTTO_NUMBER,
+  MAX_LOTTO_NUMBER,
+  LOTTO_PRICE
+} from '../util/constants/valuesConstants.js';
+
 export function validateInputIsEmpty(input) {
   if (input === '') {
-    throw new Error('[ERROR] 빈 문자열을 입력 했습니다.\n')
+    throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
   }
 }
 
 export function validateIsInteger(input) {
   if (!Number.isInteger(Number(input))) {
-    throw new Error('[ERROR] 정수를 입력해야 합니다.\n')
+    throw new Error(ERROR_MESSAGES.NOT_INTEGER);
   }
 }
 
 export function validateNumbersLength(numbers) {
-  if (numbers.length !== 6) {
-    throw new Error("[ERROR] 로또 번호는 6개여야 합니다.\n");
+  if (numbers.length !== LOTTO_NUMBER_COUNT) {
+    throw new Error(ERROR_MESSAGES.NUMBERS_LENGTH);
   }
 }
+
 export function validateNumbersDuplicate(numbers) {
   const numbersSet = new Set(numbers);
-  if (numbersSet.size !== 6) {
-    throw new Error("[ERROR] 로또 번호는 중복되면 안됩니다.\n");
+  if (numbersSet.size !== LOTTO_NUMBER_COUNT) {
+    throw new Error(ERROR_MESSAGES.NUMBERS_DUPLICATE);
   }
 }
 
 export function validateRange(input) {
-  if (input < 1 || 45 < input) {
-    throw new Error("[ERROR] 로또 번호는 1~45 사이어야 합니다.\n");
+  if (input < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < input) {
+    throw new Error(ERROR_MESSAGES.OUT_OF_RANGE);
   }
 }
 
 export function validateIsIncludeNumber(numbers, input) {
   if (numbers.includes(input)) {
-    throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.\n");
+    throw new Error(ERROR_MESSAGES.BONUS_DUPLICATE);
   }
 }
 
 export function validateDivideThousand(input) {
-  if (Number(input) % 1000) {
-    throw new Error("[ERROR] 입력 금액은 1000원 나누어 떨어져야합니다.\n");
+  if (Number(input) % LOTTO_PRICE) {
+    throw new Error(ERROR_MESSAGES.NOT_DIVIDE_THOUSAND);
   }
 }
 
