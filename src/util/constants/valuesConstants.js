@@ -5,3 +5,4 @@ export const LOTTO_NUMBER_COUNT = 6;
 export const RATE_ROUND_UNIT = 10;
 export const EMPTY_INPUT = '';
 export const NO_PURCHASE = 0;
+export const DEFAULT_RATE = 0;

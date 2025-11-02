@@ -1,5 +1,5 @@
 import { MATCH_COUNT_PRICE, MATCH_COUNT_KEYS } from "../util/constants/lottoConstants.js";
-import { LOTTO_PRICE, RATE_ROUND_UNIT } from "../util/constants/valuesConstants.js";
+import { LOTTO_PRICE, RATE_ROUND_UNIT, DEFAULT_RATE } from "../util/constants/valuesConstants.js";
 
 class LottoResult {
   #matchResult
@@ -20,7 +20,7 @@ class LottoResult {
     const totalReturn = this.#calculateTotalReturn(matchPrice, matchCountKeys);
     const rateOfResult = Math.round((totalReturn * LOTTO_PRICE) / purchaseAmount) / RATE_ROUND_UNIT;
 
-    return rateOfResult;
+    return rateOfResult || DEFAULT_RATE;
   }
 
   #calculateTotalReturn(matchPrice, matchCountKeys) {
