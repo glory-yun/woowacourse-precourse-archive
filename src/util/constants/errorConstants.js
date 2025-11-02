@@ -6,4 +6,5 @@ export const ERROR_MESSAGES = {
   OUT_OF_RANGE: `[ERROR] 로또 번호는 1~45 사이어야 합니다.\n`,
   BONUS_DUPLICATE: `[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.\n`,
   NOT_DIVIDE_THOUSAND: `[ERROR] 입력 금액은 1000원 나누어 떨어져야합니다.\n`,
+  NEGATIVE_NUMBER: '[ERROR] 구입 금액은 음수일 수 없습니다.\n'
 };

@@ -3,12 +3,20 @@ import {
   LOTTO_NUMBER_COUNT,
   MIN_LOTTO_NUMBER,
   MAX_LOTTO_NUMBER,
-  LOTTO_PRICE
+  LOTTO_PRICE,
+  EMPTY_INPUT,
+  NO_PURCHASE
 } from '../util/constants/valuesConstants.js';
 
 export function validateInputIsEmpty(input) {
   if (input === '') {
     throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
+  }
+}
+
+export function validateIsPositive(input) {
+  if (Number(input) < 0) {
+    throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
   }
 }
 
@@ -69,4 +77,5 @@ export function validatePurchaseAmount(input) {
   validateInputIsEmpty(input);
   validateIsInteger(input);
   validateDivideThousand(input);
+  validateIsPositive(input);
 }
