@@ -1,0 +1,14 @@
+package woowatech.open_mission;
+
+import java.util.Map;
+
+public class Section {
+    Map<String, String> section;
+
+    public Section(Map<String, String> section) {
+        this.section = section;
+    }
+    public Map<String, String> getSection() {
+        return this.section;
+    }
+}
