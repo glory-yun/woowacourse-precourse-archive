@@ -6,10 +6,15 @@ public class Contents {
     private List<Section> sections;
 
     public Contents(List<Section> sections) {
-         this.sections = sections;
+        this.sections = sections;
     }
 
     public List<Section> getSectionList() {
         return this.sections;
+    }
+
+    //setter
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }
