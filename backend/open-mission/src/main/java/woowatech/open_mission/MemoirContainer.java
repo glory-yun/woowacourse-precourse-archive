@@ -1,20 +1,32 @@
 package woowatech.open_mission;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoirContainer {
-    private Map<Integer, Memoir> memoirMap;
-    public MemoirContainer(Map<Integer,Memoir> memoirInput) {
-        this.memoirMap = memoirInput;
+    private final Map<Integer, Memoir> memoirMap;
+    private int id;
+
+    public MemoirContainer() {
+        this.memoirMap = new HashMap<>();
+        id = 0;
     }
 
-    public List<Memoir> getMemoir(){
-        List<Memoir> list = new ArrayList<>();
-        for(int i=0; i<memoirMap.size(); i++) {
-            list.add(memoirMap.get(i));
-        }
-        return list;
+    //회고록 저장
+    public void saveMemoir(Memoir memoir) {
+        memoirMap.put(++id, memoir);
+    }
+
+    //회고록 삭제
+    public void removeMemoir(Integer memoirId) {
+        memoirMap.remove(memoirId);
+    }
+
+    //get Memoir
+    public List<Memoir> getMemoir() {
+        return new ArrayList<>(memoirMap.values());
     }
 }
