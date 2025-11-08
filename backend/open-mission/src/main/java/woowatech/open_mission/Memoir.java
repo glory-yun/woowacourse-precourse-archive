@@ -25,4 +25,17 @@ public class Memoir {
     public Contents getContents() {
         return this.contents;
     }
+
+    //setter
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContents(Contents contents) {
+        this.contents = contents;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
