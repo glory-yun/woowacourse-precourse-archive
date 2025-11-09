@@ -1,4 +1,4 @@
-import { getMemoirs } from "./getApi.js";
+import { getMomoirDetail } from "./getApi.js";
 
 const cardContainer = document.querySelector(".cardContainer")
 
@@ -6,7 +6,7 @@ window.addEventListener("load", getList)
 
 async function getList(e) {
 
-    //const data = await getMemoirs();
+    //const data = await getMomoirDetail();
     const data = [
         {
             "id": 1,
@@ -49,6 +49,11 @@ async function getList(e) {
 function getDetail(e) {
     const card = e.target.closest('.card');
     if (card) {
-        location.replace()
+        const url = new URL("http://localhost:5500/frontend/components/memoirDetail.html")
+        const param = url.searchParams
+
+        param.append("id", card.id)
+        
+        window.location.href = url
     }
 }
