@@ -1,45 +1,26 @@
-package woowatech.open_mission;
+package woowatech.open_mission.Controller;
 
+import org.springframework.web.bind.annotation.RestController;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
 import woowatech.open_mission.Domain.Memoir;
+import woowatech.open_mission.Repository.MemoirContainer;
+import woowatech.open_mission.Service.MemoirService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@RestController
 public class MemoirController {
-    private MemoirContainer memoirContainer;
+    private MemoirService memoirService;
 
-    public MemoirController() {
-        memoirContainer = new MemoirContainer();
-    }
-
-    //Memoir summary Dto 생성
-    public List<MemoirSummaryDto> getMemoirSummary() {
-        Map<Integer, Memoir> memoirMap = memoirContainer.getMemoirMap();
-        List<MemoirSummaryDto> summary = new ArrayList<>();
-
-        for (Map.Entry<Integer, Memoir> entry : memoirMap.entrySet()) {
-            Memoir memoir = entry.getValue();
-            summary.add(new MemoirSummaryDto(entry.getKey(), memoir.getTitle(), memoir.getDate()));
-        }
-        return summary;
+    public MemoirController(MemoirService memoirService) {
+        this.memoirService = memoirService;
     }
 
     //memoirId에 해당하는 회고록 반환
-    public Memoir getMemoirById(Integer memoirId) {
-        Map<Integer, Memoir> memoirMap = memoirContainer.getMemoirMap();
-        Memoir memoirById = memoirMap.get(memoirId);
-        return memoirById;
-    }
-
-    //회고록 저장 요청이 들어오면 memoirContainer에 저장
-    public void saveMemoir(Memoir memoir) {
-        memoirContainer.saveMemoir(memoir);
-    }
-
-    //회고록 삭제 요청이 들어오면 memoirContainer에서 삭제
-    public void deleteMemoir(Integer memoirId) {
-        memoirContainer.removeMemoir(memoirId);
-    }
+    //전체 회고 목록 반환 (summary DTO)
+    //Memoir 저장
+    //Memoir 삭제
+    //Memoir 수정
 }

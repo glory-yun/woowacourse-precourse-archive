@@ -1,10 +1,12 @@
 package woowatech.open_mission.Repository;
 
+import org.springframework.stereotype.Repository;
 import woowatech.open_mission.Domain.Memoir;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class MemoirContainer {
     private final Map<Integer, Memoir> memoirMap;
     private int id;
@@ -24,7 +26,7 @@ public class MemoirContainer {
         memoirMap.remove(memoirId);
     }
 
-    //get {memoirId : Memoir}
+    //전체 매핑된 회고록 가져오기
     public Map<Integer, Memoir> getMemoirMap() {
         return memoirMap;
     }
