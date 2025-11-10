@@ -1,4 +1,4 @@
-package woowatech.open_mission.domain;
+package woowatech.open_mission.Domain;
 
 import java.util.Date;
 

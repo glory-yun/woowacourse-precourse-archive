@@ -1,6 +1,6 @@
-package woowatech.open_mission;
+package woowatech.open_mission.Repository;
 
-import woowatech.open_mission.domain.Memoir;
+import woowatech.open_mission.Domain.Memoir;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package woowatech.open_mission;
+package woowatech.open_mission.Domain;
 
 import java.util.List;
 
