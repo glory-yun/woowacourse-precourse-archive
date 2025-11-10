@@ -1,6 +1,7 @@
 package woowatech.open_mission;
 
 import woowatech.open_mission.DTO.MemoirSummaryDto;
+import woowatech.open_mission.domain.Memoir;
 
 import java.util.ArrayList;
 import java.util.List;

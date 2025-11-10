@@ -1,10 +1,9 @@
 package woowatech.open_mission;
 
-import java.util.ArrayList;
+import woowatech.open_mission.domain.Memoir;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoirContainer {
     private final Map<Integer, Memoir> memoirMap;

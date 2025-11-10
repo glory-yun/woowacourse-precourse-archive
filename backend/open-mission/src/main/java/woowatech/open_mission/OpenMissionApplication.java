@@ -9,5 +9,4 @@ public class OpenMissionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OpenMissionApplication.class, args);
 	}
-
 }
