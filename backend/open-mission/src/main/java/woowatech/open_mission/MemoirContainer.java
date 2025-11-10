@@ -25,8 +25,8 @@ public class MemoirContainer {
         memoirMap.remove(memoirId);
     }
 
-    //get Memoir
-    public List<Memoir> getMemoir() {
-        return new ArrayList<>(memoirMap.values());
+    //get {memoirId : Memoir}
+    public Map<Integer, Memoir> getMemoirMap() {
+        return memoirMap;
     }
 }
