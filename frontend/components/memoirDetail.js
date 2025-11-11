@@ -6,7 +6,7 @@ async function getDetail() {
     const url = new URL(window.location.href)
     const id = url.searchParams.get("id")
 
-    //const data = getMomoirDetail()
+    //const data = getMomoirDetail(id)
     const data =
     {
         "title": "11월 회고",

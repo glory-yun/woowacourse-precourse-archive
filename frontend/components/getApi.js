@@ -7,9 +7,12 @@ export async function getMemoirs() {
     return memoirs;
 }
 
-export async function getMomoirDetail() {
+export async function getMomoirDetail(id) {
+    let urlParams = url.searchParams
+    urlParams.append("id", id)
+
     const response = await
-        fetch(url);
+        fetch(url + urlParams);
     const memoir = await response.json();
     return memoir;
 }
