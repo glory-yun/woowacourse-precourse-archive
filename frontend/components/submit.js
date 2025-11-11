@@ -70,6 +70,15 @@ async function handleSubmit(e) {
     }
     await postMemoir(memoir)
 
+    getMemoirs()
+
+}
+
+function getMemoirs() {
+    if (confirm('저장했습니다')) {
+        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        window.location.href = url
+    }
 }
 
 function getDate() {
