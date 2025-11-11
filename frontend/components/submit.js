@@ -1,3 +1,5 @@
+import { postMemoir } from "./getApi.js";
+
 const writeFrm = document.querySelector("#writeFrm");
 const header = writeFrm.querySelector("header")
 const main = writeFrm.querySelector("main")
@@ -39,22 +41,45 @@ function loadForm() {
 
 writeFrm.addEventListener("submit", handleSubmit);
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
 
     const title = document.querySelector("#title").value;
     const content = document.querySelector("#content");
-    const contents = content.querySelector(".form-control");
+    const contents = content.querySelectorAll(".form-control");
 
-    const form = document.createElement("form");
-    const url = "http://localhost:8080"
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', url);
+    let memoir = {
+        "title": title,
+        "date": getDate(),
+        "contents": {
+            "sections": [
+                {
+                    "subTitle": "잘한 점",
+                    "description": contents[0].value
+                },
+                {
+                    "subTitle": "아쉬운 점",
+                    "description": contents[1].value
+                },
+                {
+                    "subTitle": "다음주 목표",
+                    "description": contents[2].value
+                }
+            ]
+        }
+    }
+    await postMemoir(memoir)
 
-    const data = document.createElement('input');
-    data.setAttribute("title", title);
-    data.setAttribute("contents", contents);
+}
 
-    form.appendChild(data);
-    form.submit();
+function getDate() {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+
+    const dateString = year + '-' + month + '-' + day;
+
+    return dateString;
 }
