@@ -1,5 +1,6 @@
 package woowatech.open_mission.Domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Memoir {
     private String title;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @OneToOne(cascade = CascadeType.ALL)
