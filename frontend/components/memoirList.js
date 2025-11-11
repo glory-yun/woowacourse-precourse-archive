@@ -1,4 +1,5 @@
 import { getMomoirDetail } from "./getApi.js";
+import { memoirList as data } from "./testData.js";
 
 const cardContainer = document.querySelector(".cardContainer")
 
@@ -7,23 +8,6 @@ window.addEventListener("load", getList)
 async function getList() {
 
     //const data = await getMomoirDetail();
-    const data = [
-        {
-            "id": 1,
-            "title": "첫 번째 회고록",
-            "date": "2025-11-01"
-        },
-        {
-            "id": 2,
-            "title": "두 번째 회고록",
-            "date": "2025-11-03"
-        },
-        {
-            "id": 3,
-            "title": "세 번째 회고록",
-            "date": "2025-11-05"
-        }
-    ]
     //data = JSON.parse(data)
 
     makeCard(data)
