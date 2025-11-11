@@ -1,16 +1,24 @@
 package woowatech.open_mission.Domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Map;
 
 @Getter
 @Setter
+@Entity
+@NoArgsConstructor
 public class Section {
-    Map<String, String> section;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
 
-    public Section(Map<String, String> section) {
-        this.section = section;
-    }
+    @Column
+    private String subTitle;
+
+    @Column
+    private String description;
 }
