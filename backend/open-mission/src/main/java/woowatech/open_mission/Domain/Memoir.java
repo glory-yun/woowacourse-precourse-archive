@@ -1,21 +1,29 @@
 package woowatech.open_mission.Domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@Entity
+@NoArgsConstructor
 public class Memoir {
 
-    private String title;
-    private Date date;
-    private Contents contents;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Memoir(String title, Contents contents, Date date) {
-        this.title = title;
-        this.contents = contents;
-        this.date = date;
-    }
+    @Column(nullable = false)
+    private String title;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contents_id", nullable = false)
+    private Contents contents;
 }
