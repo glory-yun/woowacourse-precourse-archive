@@ -1,10 +1,9 @@
 package woowatech.open_mission;
 
-import java.util.ArrayList;
+import woowatech.open_mission.domain.Memoir;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoirContainer {
     private final Map<Integer, Memoir> memoirMap;
@@ -25,8 +24,8 @@ public class MemoirContainer {
         memoirMap.remove(memoirId);
     }
 
-    //get Memoir
-    public List<Memoir> getMemoir() {
-        return new ArrayList<>(memoirMap.values());
+    //get {memoirId : Memoir}
+    public Map<Integer, Memoir> getMemoirMap() {
+        return memoirMap;
     }
 }
