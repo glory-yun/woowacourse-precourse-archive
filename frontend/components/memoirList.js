@@ -24,8 +24,12 @@ async function getList() {
             "date": "2025-11-05"
         }
     ]
-    //const json_data = JSON.parse(data)
+    //data = JSON.parse(data)
 
+    makeCard(data)
+}
+
+function makeCard(data) {
     let memoirList = ""
 
     data.forEach(element => {
@@ -41,7 +45,7 @@ async function getList() {
     cardContainer.innerHTML = memoirList;
 
     const card = document.querySelectorAll('.card');
-        card.forEach((element) => {
+    card.forEach((element) => {
         element.addEventListener("click", getDetail)
     })
 }
@@ -53,7 +57,7 @@ function getDetail(e) {
         const param = url.searchParams
 
         param.append("id", card.id)
-        
+
         window.location.href = url
     }
 }
