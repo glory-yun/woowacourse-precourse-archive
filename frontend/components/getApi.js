@@ -1,13 +1,28 @@
+const url = new URL("http://localhost:8080")
+
 export async function getMemoirs() {
-    const response = await 
-    fetch("http://localhost:8080");
+    const response = await
+        fetch(url);
     const memoirs = await response.json();
     return memoirs;
 }
 
-export async function getMomoirDetail() {
-    const response = await 
-    fetch("http://localhost:8080");
+export async function getMomoirDetail(id) {
+    let urlParams = url.searchParams
+    urlParams.append("id", id)
+
+    const response = await
+        fetch(url + urlParams);
     const memoir = await response.json();
     return memoir;
+}
+
+export async function postMemoir(memoir) {
+    const response = await
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                memoir
+            }),
+        })
 }
