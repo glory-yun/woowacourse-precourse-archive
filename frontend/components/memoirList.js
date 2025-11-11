@@ -4,7 +4,7 @@ const cardContainer = document.querySelector(".cardContainer")
 
 window.addEventListener("load", getList)
 
-async function getList(e) {
+async function getList() {
 
     //const data = await getMomoirDetail();
     const data = [
