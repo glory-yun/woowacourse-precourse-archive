@@ -1,6 +1,7 @@
 package woowatech.open_mission.Service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
 import woowatech.open_mission.Domain.Memoir;
 import woowatech.open_mission.Repository.MemoirContainer;
@@ -36,5 +37,15 @@ public class MemoirService {
 
     public void deleteMemoir(Long memoirId) {
         memoirContainer.deleteById(memoirId);
+    }
+
+    public void updateMemoir(Long memoirId, @RequestBody Memoir updateMemoir) {
+        Memoir memoir = memoirContainer.findById(memoirId).orElse(null);
+
+        memoir.setTitle(updateMemoir.getTitle());
+        memoir.setDate(updateMemoir.getDate());
+        memoir.setContents(updateMemoir.getContents());
+
+        memoirContainer.save(memoir);
     }
 }
