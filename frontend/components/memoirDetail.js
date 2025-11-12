@@ -1,4 +1,5 @@
 import { getMomoirDetail } from "./getApi.js"
+import { deleteMemoir } from "./getApi.js"
 import { memoirDetail as data } from "./testData.js"
 
 window.addEventListener("load", getDetail)
@@ -8,7 +9,6 @@ const id = url.searchParams.get("id")
 
 async function getDetail() {
     sessionStorage.setItem("post", JSON.stringify(data)) // API 연동 전 임시 sessionStorage 저장
-    console.log(sessionStorage.getItem("post"))
 
     //const data = getMomoirDetail(id)
     //data = JSON.parse(data)
@@ -36,4 +36,19 @@ function getModify() {
     param.append("id", id)
 
     window.location.href = url
+}
+
+const deleteBtn = document.querySelector("#delete")
+deleteBtn.addEventListener("click", deletePost)
+
+async function deletePost(e) {
+    // await deleteMemoir(id)
+    getMemoirs()
+}
+
+function getMemoirs() {
+    if (confirm('삭제했습니다')) {
+        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        window.location.href = url
+    }
 }
