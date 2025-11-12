@@ -27,3 +27,14 @@ export async function postMemoir(memoir) {
             }),
         })
 }
+
+export async function putMemoir(id, memoir) {
+    let urlParams = url.searchParams
+    urlParams.append("id", id)
+
+    const response = await
+        fetch(url + urlParams, {
+            method: "PUT",
+            body: JSON.stringify(memoir)
+        });
+}
