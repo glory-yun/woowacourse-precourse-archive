@@ -21,8 +21,8 @@ public class MemoirController {
         return memoirService.getMemoirSummary();
     }
 
-    @GetMapping("/{memoirId}")
-    public Memoir getMemoir(@PathVariable Long memoirId) {
+    @GetMapping(params = "id")
+    public Memoir getMemoir(@RequestParam("id") Long memoirId) {
         return memoirService.getMemoirById(memoirId);
     }
 
@@ -31,13 +31,13 @@ public class MemoirController {
         memoirService.saveMemoir(memoir);
     }
 
-    @DeleteMapping("/{memoirId}")
-    public void deleteMemoir(@PathVariable Long memoirId) {
+    @DeleteMapping(params = "id")
+    public void deleteMemoir(@RequestParam("id") Long memoirId) {
         memoirService.deleteMemoir(memoirId);
     }
 
-    @PutMapping("/{memoirId}")
-    public void updateMemoir(@PathVariable Long memoirId, @RequestBody Memoir updateMemoir) {
+    @PutMapping(params = "id")
+    public void updateMemoir(@RequestParam("id") Long memoirId, @RequestBody Memoir updateMemoir) {
         memoirService.updateMemoir(memoirId, updateMemoir);
     }
 }
