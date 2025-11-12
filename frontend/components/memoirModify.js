@@ -1,9 +1,14 @@
+import { putMemoir } from "./getApi.js";
+
 window.addEventListener("load", loadForm)
 
-const writeFrm = document.querySelector("#modifyFrm");
-const header = writeFrm.querySelector("header")
-const main = writeFrm.querySelector("main")
-const footer = writeFrm.querySelector("footer")
+const url = new URL(window.location.href)
+const id = url.searchParams.get("id")
+
+const modifyFrm = document.querySelector("#modifyFrm");
+const header = modifyFrm.querySelector("header")
+const main = modifyFrm.querySelector("main")
+const footer = modifyFrm.querySelector("footer")
 
 const data = JSON.parse(sessionStorage.getItem("post"))
 
@@ -37,4 +42,58 @@ function loadForm() {
         <button type="submit" class="btn btn-primary px-4">수정하기</button>
       </div>
     `
+}
+
+modifyFrm.addEventListener("submit", handleSubmit)
+
+async function handleSubmit(event) {
+    event.preventDefault();
+
+    const title = document.querySelector("#title").value;
+    const content = document.querySelector("#content");
+    const contents = content.querySelectorAll(".form-control");
+
+    let memoir = {
+        "title": title,
+        "date": getDate(),
+        "contents": {
+            "sections": [
+                {
+                    "subTitle": "잘한 점",
+                    "description": contents[0].value
+                },
+                {
+                    "subTitle": "아쉬운 점",
+                    "description": contents[1].value
+                },
+                {
+                    "subTitle": "다음주 목표",
+                    "description": contents[2].value
+                }
+            ]
+        }
+    }
+
+    await putMemoir(id, memoir)
+
+    getMemoirs();
+}
+
+function getMemoirs() {
+    if (confirm('수정 됐습니다')) {
+        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        window.location.href = url
+    }
+}
+
+function getDate() {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+
+    const dateString = year + '-' + month + '-' + day;
+
+    return dateString;
 }
