@@ -38,3 +38,13 @@ export async function putMemoir(id, memoir) {
             body: JSON.stringify(memoir)
         });
 }
+
+export async function deleteMemoir(id) {
+    let urlParams = url.searchParams
+    urlParams.append("id", id)
+
+    const response = await
+        fetch(url + urlParams, {
+            method: "DELETE"
+        });
+}
