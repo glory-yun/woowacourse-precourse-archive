@@ -1,41 +1,31 @@
 package woowatech.open_mission.Domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
 public class Memoir {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contents_id", nullable = false)
     private Contents contents;
-
-
-    public Memoir(String title, Contents contents, Date date) {
-        this.title = title;
-        this.contents = contents;
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public Date getDate() {
-        return this.date;
-    }
-
-    public Contents getContents() {
-        return this.contents;
-    }
-
-    //setter
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContents(Contents contents) {
-        this.contents = contents;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

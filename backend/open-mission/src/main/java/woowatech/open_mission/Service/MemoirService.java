@@ -7,42 +7,34 @@ import woowatech.open_mission.Repository.MemoirContainer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MemoirService {
-    private  MemoirContainer memoirContainer;
+    private final MemoirContainer memoirContainer;
 
     public MemoirService(MemoirContainer memoirContainer) {
         this.memoirContainer = memoirContainer;
     }
 
-    //Memoir summary Dto 반환
     public List<MemoirSummaryDto> getMemoirSummary() {
-        Map<Integer, Memoir> memoirMap = memoirContainer.getMemoirMap();
+        List<Memoir> memoirList = memoirContainer.findAll();
         List<MemoirSummaryDto> summary = new ArrayList<>();
 
-        for (Map.Entry<Integer, Memoir> entry : memoirMap.entrySet()) {
-            Memoir memoir = entry.getValue();
-            summary.add(new MemoirSummaryDto(entry.getKey(), memoir.getTitle(), memoir.getDate()));
+        for (Memoir memoir : memoirList) {
+            summary.add(new MemoirSummaryDto(memoir.getId(), memoir.getTitle(), memoir.getDate()));
         }
         return summary;
     }
 
-    //memoirId에 해당하는 회고록 반환
-    public Memoir getMemoirById(Integer memoirId) {
-        Map<Integer, Memoir> memoirMap = memoirContainer.getMemoirMap();
-        Memoir memoirById = memoirMap.get(memoirId);
-        return memoirById;
+    public Memoir getMemoirById(Long memoirId) {
+        return memoirContainer.findById(memoirId).orElse(null);
     }
 
-    // 회고록 저장
     public void saveMemoir(Memoir memoir) {
-        memoirContainer.saveMemoir(memoir);
+        memoirContainer.save(memoir);
     }
 
-    // 회고록 삭제
-    public void deleteMemoir(Integer memoirId) {
-        memoirContainer.removeMemoir(memoirId);
+    public void deleteMemoir(Long memoirId) {
+        memoirContainer.deleteById(memoirId);
     }
 }

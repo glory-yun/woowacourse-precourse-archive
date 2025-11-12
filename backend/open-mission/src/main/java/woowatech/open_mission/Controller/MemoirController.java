@@ -10,33 +10,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/memoir")
 public class MemoirController {
-    private MemoirService memoirService;
+    private final MemoirService memoirService;
 
     public MemoirController(MemoirService memoirService) {
         this.memoirService = memoirService;
     }
 
-    //전체 회고 목록 반환 (summary DTO)
     @GetMapping
     public List<MemoirSummaryDto> getMemoirSummary() {
         return memoirService.getMemoirSummary();
     }
 
-    //memoirId에 해당하는 회고록 반환
     @GetMapping("/{memoirId}")
-    public Memoir getMemoir(@PathVariable Integer memoirId) {
+    public Memoir getMemoir(@PathVariable Long memoirId) {
         return memoirService.getMemoirById(memoirId);
     }
 
-    //Memoir 저장
     @PostMapping
     public void saveMemoir(@RequestBody Memoir memoir) {
         memoirService.saveMemoir(memoir);
     }
 
-    //Memoir 삭제
     @DeleteMapping("/{memoirId}")
-    public void deleteMemoir(@PathVariable Integer memoirId) {
+    public void deleteMemoir(@PathVariable Long memoirId) {
         memoirService.deleteMemoir(memoirId);
     }
 }
