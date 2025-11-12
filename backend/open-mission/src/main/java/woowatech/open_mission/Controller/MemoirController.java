@@ -35,4 +35,9 @@ public class MemoirController {
     public void deleteMemoir(@PathVariable Long memoirId) {
         memoirService.deleteMemoir(memoirId);
     }
+
+    @PutMapping("/{memoirId}")
+    public void updateMemoir(@PathVariable Long memoirId, @RequestBody Memoir updateMemoir) {
+        memoirService.updateMemoir(memoirId, updateMemoir);
+    }
 }
