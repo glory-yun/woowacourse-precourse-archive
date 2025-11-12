@@ -14,6 +14,7 @@ export async function getMomoirDetail(id) {
     const response = await
         fetch(url + urlParams);
     const memoir = await response.json();
+    sessionStorage.setItem("memoir", JSON.stringify(memoir))
     return memoir;
 }
 

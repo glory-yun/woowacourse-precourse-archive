@@ -4,6 +4,8 @@ import { memoirDetail as data } from "./testData.js"
 window.addEventListener("load", getDetail)
 
 async function getDetail() {
+    sessionStorage.setItem("post", JSON.stringify(data)) // API 연동 전 임시 sessionStorage 저장
+
     const url = new URL(window.location.href)
     const id = url.searchParams.get("id")
 
