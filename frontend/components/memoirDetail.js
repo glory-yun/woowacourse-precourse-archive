@@ -3,11 +3,12 @@ import { memoirDetail as data } from "./testData.js"
 
 window.addEventListener("load", getDetail)
 
+const url = new URL(window.location.href)
+const id = url.searchParams.get("id")
+
 async function getDetail() {
     sessionStorage.setItem("post", JSON.stringify(data)) // API 연동 전 임시 sessionStorage 저장
-
-    const url = new URL(window.location.href)
-    const id = url.searchParams.get("id")
+    console.log(sessionStorage.getItem("post"))
 
     //const data = getMomoirDetail(id)
     //data = JSON.parse(data)
@@ -23,4 +24,16 @@ async function getDetail() {
     learnedThisWeek.innerHTML = data.contents.sections[0]["description"]
     difficultyThisWeek.innerHTML = data.contents.sections[1]["description"]
     goalNextWeek.innerHTML = data.contents.sections[2]["description"]
+}
+
+const modifyBtn = document.querySelector("#modifyBtn")
+modifyBtn.addEventListener("click", getModify)
+
+function getModify() {
+    const url = new URL("http://localhost:5500/frontend/components/memoirModify.html")
+    const param = url.searchParams
+
+    param.append("id", id)
+
+    window.location.href = url
 }
