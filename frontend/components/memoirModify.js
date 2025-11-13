@@ -10,7 +10,7 @@ const header = modifyFrm.querySelector("header")
 const main = modifyFrm.querySelector("main")
 const footer = modifyFrm.querySelector("footer")
 
-const data = JSON.parse(sessionStorage.getItem("post"))
+const data = JSON.parse(sessionStorage.getItem("memoir"))
 
 function loadForm() {
     header.innerHTML = `
@@ -76,12 +76,16 @@ async function handleSubmit(event) {
 
     await putMemoir(id, memoir)
 
-    getMemoirs();
+    getDetail();
 }
 
-function getMemoirs() {
+function getDetail() {
     if (confirm('수정 됐습니다')) {
-        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        const url = new URL("http://localhost:5500/frontend/components/memoirDetail.html")
+        const param = url.searchParams
+
+        param.append("id", id)
+
         window.location.href = url
     }
 }
