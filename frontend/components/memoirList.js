@@ -1,4 +1,4 @@
-import { getMemoirs } from "./getApi.js";
+import { getMemoirs } from "./getMemoirApi.js";
 // import { memoirList as data } from "./testData.js";
 
 const cardContainer = document.querySelector(".cardContainer")

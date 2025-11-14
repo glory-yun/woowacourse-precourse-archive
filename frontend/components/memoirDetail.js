@@ -1,5 +1,5 @@
-import { getMomoirDetail } from "./getApi.js"
-import { deleteMemoir } from "./getApi.js"
+import { getMomoirDetail } from "./getMemoirApi.js"
+import { deleteMemoir } from "./getMemoirApi.js"
 // import { memoirDetail as data } from "./testData.js"
 
 window.addEventListener("load", getDetail)
