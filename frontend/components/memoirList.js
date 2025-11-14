@@ -1,15 +1,12 @@
-import { getMomoirDetail } from "./getApi.js";
-import { memoirList as data } from "./testData.js";
+import { getMemoirs } from "./getApi.js";
+// import { memoirList as data } from "./testData.js";
 
 const cardContainer = document.querySelector(".cardContainer")
 
 window.addEventListener("load", getList)
 
 async function getList() {
-
-    //const data = await getMomoirDetail();
-    //data = JSON.parse(data)
-
+    const data = await getMemoirs()
     makeCard(data)
 }
 
@@ -19,7 +16,7 @@ function makeCard(data) {
     data.forEach(element => {
 
         memoirList += `
-        <div class='card' id=${element.id}>
+        <div class='card' id=${element.memoriId}>
           <p id="title">${element.title}</p>
           <time datetime="YYYY-MM-DD">${element.date}</time>
         </div>

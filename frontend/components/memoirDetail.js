@@ -1,14 +1,14 @@
 import { getMomoirDetail } from "./getApi.js"
-import { memoirDetail as data } from "./testData.js"
+import { deleteMemoir } from "./getApi.js"
+// import { memoirDetail as data } from "./testData.js"
 
 window.addEventListener("load", getDetail)
 
-async function getDetail() {
-    const url = new URL(window.location.href)
-    const id = url.searchParams.get("id")
+const url = new URL(window.location.href)
+const id = url.searchParams.get("id")
 
-    //const data = getMomoirDetail(id)
-    //data = JSON.parse(data)
+async function getDetail() {
+    const data = await getMomoirDetail(id)
 
     const title = document.querySelector("#title")
     const date = document.querySelector("#date")
@@ -21,4 +21,31 @@ async function getDetail() {
     learnedThisWeek.innerHTML = data.contents.sections[0]["description"]
     difficultyThisWeek.innerHTML = data.contents.sections[1]["description"]
     goalNextWeek.innerHTML = data.contents.sections[2]["description"]
+}
+
+const modifyBtn = document.querySelector("#modifyBtn")
+modifyBtn.addEventListener("click", getModify)
+
+function getModify() {
+    const url = new URL("http://localhost:5500/frontend/components/memoirModify.html")
+    const param = url.searchParams
+
+    param.append("id", id)
+
+    window.location.href = url
+}
+
+const deleteBtn = document.querySelector("#delete")
+deleteBtn.addEventListener("click", deletePost)
+
+async function deletePost(e) {
+    await deleteMemoir(id)
+    getMemoirs()
+}
+
+function getMemoirs() {
+    if (confirm('삭제했습니다')) {
+        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        window.location.href = url
+    }
 }
