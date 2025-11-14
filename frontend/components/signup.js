@@ -17,4 +17,13 @@ async function signup(e) {
     }
 
     await saveUser(user)
+
+    getLogin()
+}
+
+function getLogin() {
+    if (confirm('회원가입 됐습니다')) {
+        const url = new URL("http://localhost:5500/frontend/components/login.html")
+        window.location.href = url
+    }
 }
