@@ -1,4 +1,4 @@
-import { putMemoir } from "./getApi.js";
+import { putMemoir } from "./getMemoirApi.js";
 
 window.addEventListener("load", loadForm)
 

@@ -1,4 +1,4 @@
-import { postMemoir } from "./getApi.js";
+import { postMemoir } from "./getMemoirApi.js";
 
 const writeFrm = document.querySelector("#writeFrm");
 const header = writeFrm.querySelector("header")
