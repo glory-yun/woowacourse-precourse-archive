@@ -25,7 +25,7 @@ public class Memoir {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "contents_id", nullable = false)
     private Contents contents;
 

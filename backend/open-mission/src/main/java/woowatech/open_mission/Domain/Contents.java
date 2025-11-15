@@ -18,7 +18,7 @@ public class Contents {
     @JsonIgnore
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "contents_id", nullable = false)
     private List<Section> sections;
 }
