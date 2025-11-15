@@ -20,5 +20,6 @@ public class Section {
     private String subTitle;
 
     @Column
+    @Lob
     private String description;
 }
