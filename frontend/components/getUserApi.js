@@ -14,7 +14,7 @@ export async function saveUser(user) {
             throw new Error()
         }
     } catch (error) {
-        alert("아이디와 비밀번호를 확인해주세요")
+        alert("아이디가 중복됩니다")
         throw error
     }
 }
