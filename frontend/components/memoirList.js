@@ -16,9 +16,9 @@ function makeCard(data) {
     data.forEach(element => {
 
         memoirList += `
-        <div class='card' id=${element.memoriId}>
-          <p id="title">${element.title}</p>
-          <time datetime="YYYY-MM-DD">${element.date}</time>
+        <div class='card mb-3 p-3 shadow-sm card-hover' id=${element.memoriId}>
+          <h5 id="title">${element.title}</h5>
+          <time datetime="YYYY-MM-DD" class="text-muted small">${element.date}</time>
         </div>
         `
     });
