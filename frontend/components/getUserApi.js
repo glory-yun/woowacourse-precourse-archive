@@ -10,3 +10,16 @@ export async function saveUser(user) {
             body: JSON.stringify(user),
         })
 }
+
+export async function getUser(user) {
+    const response = await
+        fetch(url + "signin", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+    const user = await response.json();
+    return user;
+}
