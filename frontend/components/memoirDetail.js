@@ -10,6 +10,11 @@ const id = url.searchParams.get("id")
 async function getDetail() {
     const data = await getMomoirDetail(id)
 
+    const buttons = document.querySelector(".d-none")
+    if (data.userId == localStorage.getItem("userId")) {
+        buttons.classList.remove("d-none")
+    }
+
     const title = document.querySelector("#title")
     const date = document.querySelector("#date")
     const learnedThisWeek = document.querySelector("#learned-this-week")
