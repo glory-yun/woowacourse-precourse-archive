@@ -28,4 +28,7 @@ public class Memoir {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contents_id", nullable = false)
     private Contents contents;
+
+    @Column(nullable = false)
+    private Long userId;
 }
