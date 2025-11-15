@@ -57,4 +57,14 @@ public class MemoirService {
 
         memoirContainer.save(memoir);
     }
+
+    public List<MemoirSummaryDto> getMemoirsByUserId(Long userId) {
+        List<Memoir> memoirList = memoirContainer.findAllByUserId(userId);
+        List<MemoirSummaryDto> summary = new ArrayList<>();
+
+        for (Memoir memoir : memoirList) {
+            summary.add(new MemoirSummaryDto(memoir.getId(), memoir.getTitle(), memoir.getDate()));
+        }
+        return summary;
+    }
 }
