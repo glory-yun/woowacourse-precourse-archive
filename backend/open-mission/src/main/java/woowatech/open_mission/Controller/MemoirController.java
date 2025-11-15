@@ -27,17 +27,17 @@ public class MemoirController {
     }
 
     @PostMapping
-    public void saveMemoir(@RequestBody Memoir memoir) {
-        memoirService.saveMemoir(memoir);
+    public void saveMemoir(@RequestBody Memoir memoir, @RequestHeader("user-id") Long userId) {
+        memoirService.saveMemoir(memoir, userId);
     }
 
     @DeleteMapping(params = "id")
-    public void deleteMemoir(@RequestParam("id") Long memoirId) {
-        memoirService.deleteMemoir(memoirId);
+    public void deleteMemoir(@RequestParam("id") Long memoirId, @RequestHeader("user-id") Long userId) {
+        memoirService.deleteMemoir(memoirId, userId);
     }
 
     @PutMapping(params = "id")
-    public void updateMemoir(@RequestParam("id") Long memoirId, @RequestBody Memoir updateMemoir) {
-        memoirService.updateMemoir(memoirId, updateMemoir);
+    public void updateMemoir(@RequestParam("id") Long memoirId, @RequestHeader("user-id") Long userId, @RequestBody Memoir updateMemoir) {
+        memoirService.updateMemoir(memoirId, userId, updateMemoir);
     }
 }
