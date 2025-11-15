@@ -31,16 +31,17 @@ public class MemoirService {
         return memoirContainer.findById(memoirId).orElse(null);
     }
 
-    public void saveMemoir(Memoir memoir) {
+    public void saveMemoir(Memoir memoir, Long userId) {
+        memoir.setUserId(userId);
         memoirContainer.save(memoir);
     }
 
-    public void deleteMemoir(Long memoirId) {
-        memoirContainer.deleteById(memoirId);
+    public void deleteMemoir(Long memoirId, Long userId) {
+        memoirContainer.deleteByIdAndUserId(memoirId, userId);
     }
 
-    public void updateMemoir(Long memoirId, @RequestBody Memoir updateMemoir) {
-        Memoir memoir = memoirContainer.findById(memoirId).orElse(null);
+    public void updateMemoir(Long memoirId, Long userId, Memoir updateMemoir) {
+        Memoir memoir = memoirContainer.findByIdAndUserId(memoirId, userId);
 
         memoir.setTitle(updateMemoir.getTitle());
         memoir.setDate(updateMemoir.getDate());
