@@ -18,15 +18,15 @@ function loadForm() {
     main.innerHTML = `
     <div id="content">
         <div class="mb-3">
-          <label class="form-label">1️⃣ 이번 주에 배운 점</label>
+          <label class="form-label">이번 주에 배운 점</label>
           <textarea class="form-control" rows="3" required></textarea>
         </div>
         <div class="mb-3">
-          <label class="form-label">2️⃣ 어려웠던 점</label>
+          <label class="form-label">어려웠던 점</label>
           <textarea class="form-control" rows="3" required></textarea>
         </div>
         <div class="mb-3">
-          <label class="form-label">3️⃣ 다음 주 목표</label>
+          <label class="form-label">다음 주 목표</label>
           <textarea class="form-control" rows="3" required></textarea>
         </div>
       </div>
@@ -54,15 +54,15 @@ async function handleSubmit(e) {
         "contents": {
             "sections": [
                 {
-                    "subTitle": "잘한 점",
+                    "subTitle": "이번 주에 배운 점",
                     "description": contents[0].value
                 },
                 {
-                    "subTitle": "아쉬운 점",
+                    "subTitle": "어려웠던 점",
                     "description": contents[1].value
                 },
                 {
-                    "subTitle": "다음주 목표",
+                    "subTitle": "어려웠던 점",
                     "description": contents[2].value
                 }
             ]
