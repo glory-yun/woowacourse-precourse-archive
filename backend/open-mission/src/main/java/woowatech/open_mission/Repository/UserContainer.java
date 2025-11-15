@@ -5,4 +5,6 @@ import woowatech.open_mission.Domain.User;
 
 public interface UserContainer extends JpaRepository<User, Long> {
     User findByUsername(String username);
+
+    User findByUserId(Long userId);
 }
