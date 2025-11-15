@@ -23,7 +23,8 @@ export async function postMemoir(memoir) {
         fetch(url, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',   // ← 이게 핵심!
+                'Content-Type': 'application/json',
+                'user-id': localStorage.getItem("userId")
             },
             body: JSON.stringify(memoir),
         })
@@ -37,7 +38,8 @@ export async function putMemoir(id, memoir) {
         fetch(url, {
             method: "PUT",
             headers: {
-                'Content-Type': 'application/json',   // ← 이게 핵심!
+                'Content-Type': 'application/json',
+                'user-id': localStorage.getItem("userId")
             },
             body: JSON.stringify(memoir)
         });
@@ -49,6 +51,9 @@ export async function deleteMemoir(id) {
 
     const response = await
         fetch(url, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                'user-id': localStorage.getItem("userId")
+            }
         });
 }
