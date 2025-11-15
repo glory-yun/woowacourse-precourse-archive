@@ -15,17 +15,32 @@ async function getDetail() {
         buttons.classList.remove("d-none")
     }
 
+    addCard(data.contents.sections)
+
     const title = document.querySelector("#title")
     const date = document.querySelector("#date")
-    const learnedThisWeek = document.querySelector("#learned-this-week")
-    const difficultyThisWeek = document.querySelector("#difficulty-this-week")
-    const goalNextWeek = document.querySelector("#goal-next-week")
 
     title.innerHTML = data.title
     date.innerHTML = data.date
-    learnedThisWeek.innerHTML = data.contents.sections[0]["description"]
-    difficultyThisWeek.innerHTML = data.contents.sections[1]["description"]
-    goalNextWeek.innerHTML = data.contents.sections[2]["description"]
+}
+
+function addCard(sections) {
+    const cards = document.querySelector("#wrapper")
+    let card = ""
+    sections.forEach(element => {
+        const subTitle = element["subTitle"]
+        const description = element["description"]
+        card += `
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                <h5 class="fw-semibold mb-3">${subTitle}</h5>
+                <hr />
+                <p class="text-body">${description}</p>
+                </div>
+            </div>
+            `
+    });
+    cards.innerHTML = card
 }
 
 const modifyBtn = document.querySelector("#modifyBtn")
