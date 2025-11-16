@@ -1,5 +1,6 @@
 package woowatech.open_mission.Service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import woowatech.open_mission.DTO.LoginRequestDto;
 import woowatech.open_mission.DTO.LoginResponseDto;
@@ -7,12 +8,9 @@ import woowatech.open_mission.Domain.User;
 import woowatech.open_mission.Repository.UserContainer;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserContainer userContainer;
-
-    public UserService(UserContainer userContainer) {
-        this.userContainer = userContainer;
-    }
 
     public void register(User user) {
         if (userContainer.findByUsername(user.getUsername()) != null) {

@@ -1,5 +1,6 @@
 package woowatech.open_mission.Controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
@@ -9,13 +10,10 @@ import woowatech.open_mission.Service.MemoirService;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/memoir")
 public class MemoirController {
     private final MemoirService memoirService;
-
-    public MemoirController(MemoirService memoirService) {
-        this.memoirService = memoirService;
-    }
 
     @GetMapping
     public ResponseEntity<?> getMemoirSummary() {

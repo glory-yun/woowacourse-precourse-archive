@@ -1,5 +1,6 @@
 package woowatech.open_mission.Service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
@@ -13,14 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MemoirService {
     private final MemoirContainer memoirContainer;
     private final UserContainer userContainer;
-
-    public MemoirService(MemoirContainer memoirContainer, UserContainer userContainer) {
-        this.memoirContainer = memoirContainer;
-        this.userContainer = userContainer;
-    }
 
     //summary를 추출하는 함수
     private List<MemoirSummaryDto> getSummaries(List<Memoir> memoirList) {
