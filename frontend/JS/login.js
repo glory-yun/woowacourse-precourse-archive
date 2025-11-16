@@ -1,35 +1,17 @@
 import { getUser } from "../API/getUserApi.js";
-import { BASE_URL } from "../config.js";
+import { redirectToMemoirList } from "../util/route.js";
+import { saveUser } from "../API/getUserApi.js";
 
-const loginFrm = document.querySelector("#loginForm")
-loginFrm.addEventListener("submit", login)
+const loginForm = document.querySelector("#loginForm");
+loginForm.addEventListener("submit", handleLogin);
 
-async function login(e) {
-    e.preventDefault();
+async function handleLogin(event) {
+  event.preventDefault();
 
-    const username = loginFrm.querySelector("#username").value
-    const password = loginFrm.querySelector("#password").value
+  const formData = new FormData(loginForm);
+  const loginDto = Object.fromEntries(formData.entries());
 
-
-    let loginDto = {
-        "username": username,
-        "password": password
-    }
-    const user = await getUser(loginDto)
-
-    storeUserData(user)
-    getMemoirList()
-}
-
-function storeUserData(user) {
-    const userId = user.userId
-    const username = user.username
-
-    localStorage.setItem("userId", userId)
-    localStorage.setItem("username", username)
-}
-
-function getMemoirList() {
-    const url = new URL(`${BASE_URL}/memoirList.html`)
-    window.location.href = url
+  const user = await getUser(loginDto);
+  saveUser(user);
+  redirectToMemoirList();
 }
