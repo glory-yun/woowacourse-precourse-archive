@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
 import woowatech.open_mission.Domain.Memoir;
+import woowatech.open_mission.Domain.User;
 import woowatech.open_mission.Repository.MemoirContainer;
+import woowatech.open_mission.Repository.UserContainer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +15,33 @@ import java.util.Optional;
 @Service
 public class MemoirService {
     private final MemoirContainer memoirContainer;
+    private final UserContainer userContainer;
 
-    public MemoirService(MemoirContainer memoirContainer) {
+    public MemoirService(MemoirContainer memoirContainer, UserContainer userContainer) {
         this.memoirContainer = memoirContainer;
+        this.userContainer = userContainer;
     }
 
-    public List<MemoirSummaryDto> getMemoirSummary() {
-        List<Memoir> memoirList = memoirContainer.findAll();
+    //summary를 추출하는 함수
+    private List<MemoirSummaryDto> getSummaries(List<Memoir> memoirList) {
         List<MemoirSummaryDto> summary = new ArrayList<>();
 
         for (Memoir memoir : memoirList) {
-            summary.add(new MemoirSummaryDto(memoir.getId(), memoir.getTitle(), memoir.getDate()));
+            User user = userContainer.findByUserId(memoir.getUserId());
+            summary.add(new MemoirSummaryDto(memoir.getId(), memoir.getTitle(), memoir.getDate(), user.getUsername()));
         }
         return summary;
+    }
+
+
+    public List<MemoirSummaryDto> getMemoirSummary() {
+        List<Memoir> memoirList = memoirContainer.findAll();
+        return getSummaries(memoirList);
+    }
+
+    public List<MemoirSummaryDto> getMemoirsByUserId(Long userId) {
+        List<Memoir> memoirList = memoirContainer.findAllByUserId(userId);
+        return getSummaries(memoirList);
     }
 
     public Memoir getMemoirById(Long memoirId) {
@@ -57,4 +73,6 @@ public class MemoirService {
 
         memoirContainer.save(memoir);
     }
+
+
 }

@@ -76,4 +76,14 @@ public class MemoirController {
             return ResponseEntity.internalServerError().body("회고록 수정 중 오류가 발생했습니다.");
         }
     }
+
+    @GetMapping("/mymemoir")
+    public ResponseEntity<?> getMyMemoirs(@RequestHeader("user-id") Long userId) {
+        try {
+            List<MemoirSummaryDto> myMemoirs = memoirService.getMemoirsByUserId(userId);
+            return ResponseEntity.ok(myMemoirs);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("내 회고록 조회 중 오류가 발생했습니다.");
+        }
+    }
 }
