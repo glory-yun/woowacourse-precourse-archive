@@ -30,7 +30,8 @@ public class MemoirController {
 
 
     @PostMapping
-    public ResponseEntity<?> saveMemoir(@RequestBody MemoirRequestDto memoir, @RequestHeader("user-id") Long userId) {
+    public ResponseEntity<?> saveMemoir(@RequestBody MemoirRequestDto memoir,
+                                        @RequestHeader("user-id") Long userId) {
         memoirService.saveMemoir(memoir, userId);
         return ResponseEntity.ok("회고록이 성공적으로 저장되었습니다.");
     }
