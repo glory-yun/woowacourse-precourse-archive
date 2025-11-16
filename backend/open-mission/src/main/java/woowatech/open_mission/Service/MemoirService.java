@@ -6,6 +6,7 @@ import static woowatech.open_mission.exception.ErrorCode.USERNAME_NOT_FOUND;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
 import woowatech.open_mission.Domain.Memoir;
@@ -65,6 +66,7 @@ public class MemoirService {
         memoirContainer.delete(memoir);
     }
 
+    @Transactional
     public void updateMemoir(Long memoirId, Long userId, Memoir updateMemoir) {
         Optional<Memoir> memoirOpt = memoirContainer.findByIdAndUserId(memoirId, userId);
         Memoir memoir = memoirOpt.orElseThrow(() ->
@@ -73,9 +75,5 @@ public class MemoirService {
         memoir.setTitle(updateMemoir.getTitle());
         memoir.setDate(updateMemoir.getDate());
         memoir.setContents(updateMemoir.getContents());
-
-        memoirContainer.save(memoir);
     }
-
-
 }
