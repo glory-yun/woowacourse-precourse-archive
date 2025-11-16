@@ -20,7 +20,7 @@ public class UserService {
     private final UserContainer userContainer;
 
     public void register(User user) {
-        if (userContainer.findByUsername(user.getUsername()) != null) {
+        if (userContainer.findByUsername(user.getUsername()).isEmpty()) {
             throw new CustomException(DUPLICATE_USERNAME);
         }
         userContainer.save(user);
@@ -29,11 +29,9 @@ public class UserService {
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         String username = loginRequestDto.username();
         String password = loginRequestDto.password();
-        User user = userContainer.findByUsername(username);
+        User user = userContainer.findByUsername(username)
+                .orElseThrow(() -> new CustomException(USERNAME_NOT_FOUND));
 
-        if(user == null){
-            throw new CustomException(USERNAME_NOT_FOUND);
-        }
         if(!user.getPassword().equals(password)){
             throw new CustomException(INVALID_PASSWORD);
         }

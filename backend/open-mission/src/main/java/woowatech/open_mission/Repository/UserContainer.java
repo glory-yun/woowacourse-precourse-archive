@@ -1,10 +1,11 @@
 package woowatech.open_mission.Repository;
 
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import woowatech.open_mission.Domain.User;
 
 public interface UserContainer extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    User findByUserId(Long userId);
+    Optional<User> findByUserId(Long userId);
 }
