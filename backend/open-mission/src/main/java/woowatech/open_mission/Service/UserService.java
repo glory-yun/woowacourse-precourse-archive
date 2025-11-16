@@ -18,7 +18,7 @@ public class UserService {
     private final UserContainer userContainer;
 
     public void register(User user) {
-        if (userContainer.findByUsername(user.getUsername()).isEmpty()) {
+        if (!userContainer.findByUsername(user.getUsername()).isEmpty()) {
             throw new CustomException(DUPLICATE_USERNAME);
         }
         userContainer.save(user);
