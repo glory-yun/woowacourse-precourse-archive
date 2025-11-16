@@ -1,4 +1,5 @@
 import { putMemoir } from "../API/getMemoirApi.js";
+import { BASE_URL } from "../config.js";
 
 window.addEventListener("load", loadForm)
 
@@ -164,7 +165,7 @@ async function handleSubmit(event) {
 
 function getDetail() {
     if (confirm('수정 됐습니다')) {
-        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirDetail.html")
+        const url = new URL(`${BASE_URL}/memoirDetail.html`)
         const param = url.searchParams
 
         param.append("id", id)

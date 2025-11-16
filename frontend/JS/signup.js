@@ -1,5 +1,5 @@
 import { saveUser } from "../API/getUserApi.js";
-
+import { BASE_URL } from "../config.js";
 const signupFrm = document.querySelector("#signupForm")
 signupFrm.addEventListener("submit", signup)
 
@@ -23,7 +23,7 @@ async function signup(e) {
 
 function getLogin() {
     if (confirm('회원가입 됐습니다')) {
-        const url = new URL("http://localhost:5500/frontend/Pages/memoir/login.html")
+        const url = new URL(`${BASE_URL}/login.html`)
         window.location.href = url
     }
 }

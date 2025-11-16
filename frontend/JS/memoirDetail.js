@@ -45,7 +45,7 @@ const modifyBtn = document.querySelector("#modifyBtn")
 modifyBtn.addEventListener("click", getModify)
 
 function getModify() {
-    const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirModify.html")
+    const url = new URL(`${BASE_URL}/memoirModify.html`)
     const param = url.searchParams
 
     param.append("id", id)
@@ -63,7 +63,7 @@ async function deletePost(e) {
 
 function getMemoirs() {
     if (confirm('삭제했습니다')) {
-        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirList.html")
+        const url = new URL(`${BASE_URL}/memoirList.html`)
         window.location.href = url
     }
 }

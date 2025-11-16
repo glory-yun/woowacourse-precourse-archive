@@ -1,4 +1,5 @@
 import { saveMemoir } from "../API/getMemoirApi.js";
+import { BASE_URL } from "../config.js";
 
 const writeFrm = document.querySelector("#writeFrm");
 const header = writeFrm.querySelector("header")
@@ -15,7 +16,8 @@ function loadForm() {
     </div>
     `
 
-    main.innerHTML = `
+    main.innerHTML = /* html */
+        `
     <div id="content">
         <div class="mb-3">
           <label class="form-label subtitle">이번 주에 배운 점</label>
@@ -30,7 +32,7 @@ function loadForm() {
           <textarea class="form-control description" rows="3" required></textarea>
         </div>
       </div>
-      `
+    `
 
     footer.innerHTML = `
     <div class="d-flex justify-content-end align-items-center gap-3 border-top pt-4">
@@ -122,7 +124,7 @@ async function handleSubmit(e) {
 
 function getMemoirs() {
     if (confirm('저장했습니다')) {
-        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirList.html")
+        const url = new URL(`${BASE_URL}/memoirList.html`)
         window.location.href = url
     }
 }

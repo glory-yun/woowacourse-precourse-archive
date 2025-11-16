@@ -1,4 +1,5 @@
 import { getMemoirs } from "../API/getMemoirApi.js";
+import { BASE_URL } from "../config.js";
 
 const cardContainer = document.querySelector(".cardContainer")
 
@@ -38,7 +39,7 @@ function makeCard(data) {
 function getDetail(e) {
     const card = e.target.closest('.card');
     if (card) {
-        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirDetail.html")
+        const url = new URL(`${BASE_URL}/memoirDetail.html`)
         const param = url.searchParams
 
         param.append("id", card.id)
