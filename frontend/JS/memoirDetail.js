@@ -1,6 +1,4 @@
-import { getMomoirDetail } from "./getMemoirApi.js"
-import { deleteMemoir } from "./getMemoirApi.js"
-// import { memoirDetail as data } from "./testData.js"
+import { getMomoirDetail, deleteMemoir } from "../API/getMemoirApi.js"
 
 window.addEventListener("load", getDetail)
 
@@ -47,7 +45,7 @@ const modifyBtn = document.querySelector("#modifyBtn")
 modifyBtn.addEventListener("click", getModify)
 
 function getModify() {
-    const url = new URL("http://localhost:5500/frontend/components/memoirModify.html")
+    const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirModify.html")
     const param = url.searchParams
 
     param.append("id", id)
@@ -65,7 +63,7 @@ async function deletePost(e) {
 
 function getMemoirs() {
     if (confirm('삭제했습니다')) {
-        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirList.html")
         window.location.href = url
     }
 }

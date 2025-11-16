@@ -1,4 +1,4 @@
-import { putMemoir } from "./getMemoirApi.js";
+import { putMemoir } from "../API/getMemoirApi.js";
 
 window.addEventListener("load", loadForm)
 
@@ -145,7 +145,7 @@ async function handleSubmit(event) {
     const sections = Array.from(subtitles).map((sub, idx) => {
         const subTitle = sub.tagName === "LABEL" ? sub.innerText : sub.value;
         const description = descriptions[idx].value;
-        
+
         return { subTitle, description };
     });
 
@@ -164,7 +164,7 @@ async function handleSubmit(event) {
 
 function getDetail() {
     if (confirm('수정 됐습니다')) {
-        const url = new URL("http://localhost:5500/frontend/components/memoirDetail.html")
+        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirDetail.html")
         const param = url.searchParams
 
         param.append("id", id)

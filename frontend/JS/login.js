@@ -1,4 +1,4 @@
-import { getUser } from "./getUserApi.js";
+import { getUser } from "../API/getUserApi.js";
 
 const loginFrm = document.querySelector("#loginForm")
 loginFrm.addEventListener("submit", login)
@@ -29,6 +29,6 @@ function storeUserData(user) {
 }
 
 function getMemoirList() {
-    const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+    const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirList.html")
     window.location.href = url
 }

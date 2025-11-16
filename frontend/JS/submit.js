@@ -1,4 +1,4 @@
-import { postMemoir } from "./getMemoirApi.js";
+import { saveMemoir } from "../API/getMemoirApi.js";
 
 const writeFrm = document.querySelector("#writeFrm");
 const header = writeFrm.querySelector("header")
@@ -115,14 +115,14 @@ async function handleSubmit(e) {
         }
     }
 
-    await postMemoir(memoir)
+    await saveMemoir(memoir);
 
     getMemoirs()
 }
 
 function getMemoirs() {
     if (confirm('저장했습니다')) {
-        const url = new URL("http://localhost:5500/frontend/components/memoirList.html")
+        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirList.html")
         window.location.href = url
     }
 }

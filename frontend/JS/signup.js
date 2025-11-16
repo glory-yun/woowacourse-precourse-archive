@@ -1,4 +1,4 @@
-import { saveUser } from "./getUserApi.js";
+import { saveUser } from "../API/getUserApi.js";
 
 const signupFrm = document.querySelector("#signupForm")
 signupFrm.addEventListener("submit", signup)
@@ -11,9 +11,9 @@ async function signup(e) {
     const email = signupFrm.querySelector("#email").value
 
     let user = {
-        "username" : username,
-        "password" : password,
-        "email" : email
+        "username": username,
+        "password": password,
+        "email": email
     }
 
     await saveUser(user)
@@ -23,7 +23,7 @@ async function signup(e) {
 
 function getLogin() {
     if (confirm('회원가입 됐습니다')) {
-        const url = new URL("http://localhost:5500/frontend/components/login.html")
+        const url = new URL("http://localhost:5500/frontend/Pages/memoir/login.html")
         window.location.href = url
     }
 }

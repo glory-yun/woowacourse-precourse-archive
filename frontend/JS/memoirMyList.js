@@ -1,12 +1,11 @@
-import { getMemoirs } from "./getMemoirApi.js";
-// import { memoirList as data } from "./testData.js";
+import { getMyMemoirs } from "../API/getMemoirApi.js";
 
 const cardContainer = document.querySelector(".cardContainer")
 
 window.addEventListener("load", getList)
 
 async function getList() {
-    const data = await getMemoirs()
+    const data = await getMyMemoirs()
     makeCard(data)
 }
 
@@ -39,7 +38,7 @@ function makeCard(data) {
 function getDetail(e) {
     const card = e.target.closest('.card');
     if (card) {
-        const url = new URL("http://localhost:5500/frontend/components/memoirDetail.html")
+        const url = new URL("http://localhost:5500/frontend/Pages/memoir/memoirDetail.html")
         const param = url.searchParams
 
         param.append("id", card.id)
