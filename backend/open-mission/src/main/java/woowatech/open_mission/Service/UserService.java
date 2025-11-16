@@ -38,6 +38,6 @@ public class UserService {
             throw new CustomException(INVALID_PASSWORD);
         }
 
-        return new LoginResponseDto(user.getUserId(), user.getUsername());
+        return userMapper.toDto(user);
     }
 }
