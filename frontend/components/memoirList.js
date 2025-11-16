@@ -16,12 +16,17 @@ function makeCard(data) {
     data.forEach(element => {
 
         memoirList += `
-        <div class='card mb-3 p-3 shadow-sm card-hover' id=${element.memoriId}>
-          <h5 id="title">${element.title}</h5>
-          <time datetime="YYYY-MM-DD" class="text-muted small">${element.date}</time>
-        </div>
-        `
-    });
+            <div class='card mb-3 p-3 shadow-sm card-hover' id=${element.memoriId}>
+                <h5 class="mb-2">${element.title}</h5>
+                <div class="d-flex justify-content-between align-items-end">
+                <time class="text-muted small" datetime="${element.date}">
+                    ${element.date}
+                </time>
+                <span class="text-muted small">${element.username}</span>
+                </div>
+            </div>
+            `
+    })
 
     cardContainer.innerHTML = memoirList;
 
