@@ -11,6 +11,7 @@ const main = modifyFrm.querySelector("main")
 const footer = modifyFrm.querySelector("footer")
 
 const data = JSON.parse(sessionStorage.getItem("memoir"))
+const sections = data.contents.sections
 
 function loadForm() {
     header.innerHTML = `
@@ -23,25 +24,111 @@ function loadForm() {
     main.innerHTML = `
     <div id="content">
         <div class="mb-3">
-          <label class="form-label">1️⃣ 이번 주에 배운 점</label>
-          <textarea class="form-control" rows="3" required>${data.contents.sections[0]["description"]}</textarea>
+          <label class="form-label subtitle">이번 주에 배운 점</label>
+          <textarea class="form-control description" rows="3" required>${sections[0]["description"]}</textarea>
         </div>
         <div class="mb-3">
-          <label class="form-label">2️⃣ 어려웠던 점</label>
-          <textarea class="form-control" rows="3" required>${data.contents.sections[1]["description"]}</textarea>
+          <label class="form-label subtitle">어려웠던 점</label>
+          <textarea class="form-control description" rows="3" required>${sections[1]["description"]}</textarea>
         </div>
         <div class="mb-3">
-          <label class="form-label">3️⃣ 다음 주 목표</label>
-          <textarea class="form-control" rows="3" required>${data.contents.sections[2]["description"]}</textarea>
+          <label class="form-label subtitle">다음 주 목표</label>
+          <textarea class="form-control description" rows="3" required>${sections[2]["description"]}</textarea>
         </div>
       </div>
       `
 
     footer.innerHTML = `
-    <div class="text-end border-top pt-4">
-        <button type="submit" class="btn btn-primary px-4">수정하기</button>
-      </div>
+    <div class="d-flex justify-content-end align-items-center gap-3 border-top pt-4">
+        <button 
+            type="button" 
+            class="btn bg-white border rounded-circle shadow-sm d-flex justify-content-center align-items-center plus-btn"
+            style="width: 38px; height: 38px; font-size: 22px; font-weight: 600;">
+                ✚
+        </button>
+        <button type="submit" class="btn btn-primary px-4">
+            저장하기
+        </button>
+    </div>
     `
+
+    addSubContent()
+
+    const plusBtn = document.querySelector(".plus-btn");
+    plusBtn.addEventListener("click", 함수이름미정);
+}
+
+function addSubContent() {
+    const content = document.querySelector("#content");
+
+    sections.slice(3).forEach(element => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "mb-3";
+
+        wrapper.innerHTML = `
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+                <input 
+                    type="text" 
+                    class="form-control fw-semibold mb-2 sub-title-input subtitle" 
+                    value="${element["subTitle"]}" 
+                    required
+                />
+                <textarea 
+                    class="form-control description-input description" 
+                    rows="3" 
+                    required>${element["description"]}
+                </textarea>
+            </div>
+            <button 
+                type="button" 
+                class="btn btn-outline-danger btn-sm ms-2 delete-section-btn">
+                삭제
+            </button>
+        </div>
+        `
+        content.appendChild(wrapper);
+    });
+    content.addEventListener("click", deleteSub)
+}
+
+function 함수이름미정() {
+    const content = document.querySelector("#content");
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "mb-3";
+
+    wrapper.innerHTML = `
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+                <input 
+                    type="text" 
+                    class="form-control fw-semibold mb-2 sub-title-input subtitle" 
+                    placeholder="소제목을 입력하세요 (예: 반성할 점)" 
+                    required
+                />
+                <textarea 
+                    class="form-control description-input description" 
+                    rows="3" 
+                    required>
+                </textarea>
+            </div>
+            <button 
+                type="button" 
+                class="btn btn-outline-danger btn-sm ms-2 delete-section-btn">
+                삭제
+            </button>
+        </div>
+    `;
+    content.appendChild(wrapper);
+
+    content.addEventListener("click", deleteSub)
+}
+
+function deleteSub(e) {
+    if (e.target.classList.contains("delete-section-btn")) {
+        e.target.closest(".mb-3").remove();
+    }
 }
 
 modifyFrm.addEventListener("submit", handleSubmit)
@@ -51,26 +138,22 @@ async function handleSubmit(event) {
 
     const title = document.querySelector("#title").value;
     const content = document.querySelector("#content");
-    const contents = content.querySelectorAll(".form-control");
+
+    const subtitles = content.querySelectorAll(".subtitle");
+    const descriptions = content.querySelectorAll(".description");
+
+    const sections = Array.from(subtitles).map((sub, idx) => {
+        const subTitle = sub.tagName === "LABEL" ? sub.innerText : sub.value;
+        const description = descriptions[idx].value;
+        
+        return { subTitle, description };
+    });
 
     let memoir = {
         "title": title,
         "date": getDate(),
         "contents": {
-            "sections": [
-                {
-                    "subTitle": "잘한 점",
-                    "description": contents[0].value
-                },
-                {
-                    "subTitle": "아쉬운 점",
-                    "description": contents[1].value
-                },
-                {
-                    "subTitle": "다음주 목표",
-                    "description": contents[2].value
-                }
-            ]
+            "sections": sections
         }
     }
 
