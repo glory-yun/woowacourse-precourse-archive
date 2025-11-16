@@ -1,4 +1,4 @@
-import { getMemoirs } from "./getMemoirApi.js";
+import { getMyMemoirs } from "./getMemoirApi.js";
 // import { memoirList as data } from "./testData.js";
 
 const cardContainer = document.querySelector(".cardContainer")
@@ -6,7 +6,7 @@ const cardContainer = document.querySelector(".cardContainer")
 window.addEventListener("load", getList)
 
 async function getList() {
-    const data = await getMemoirs()
+    const data = await getMyMemoirs()
     makeCard(data)
 }
 

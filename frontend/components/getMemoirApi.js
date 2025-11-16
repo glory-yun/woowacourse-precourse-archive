@@ -7,6 +7,17 @@ export async function getMemoirs() {
     return memoirs;
 }
 
+export async function getMyMemoirs() {
+    const response = await
+        fetch(url + "/mymemoir", {
+            headers: {
+                'user-id': localStorage.getItem("userId")
+            }
+        })
+    const memoirs = await response.json();
+    return memoirs;
+}
+
 export async function getMomoirDetail(id) {
     let urlParams = url.searchParams
     urlParams.append("id", id)
