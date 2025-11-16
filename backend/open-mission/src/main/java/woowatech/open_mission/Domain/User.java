@@ -1,6 +1,5 @@
 package woowatech.open_mission.Domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +9,17 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Section {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
-    private Long id;
+    private Long userId;
 
     @Column
-    private String subTitle;
+    private String username;
 
     @Column
-    @Lob
-    private String description;
+    private String password;
+
+    @Column
+    private String email;
 }

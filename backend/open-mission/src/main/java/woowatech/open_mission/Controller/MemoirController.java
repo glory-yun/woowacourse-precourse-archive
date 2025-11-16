@@ -1,5 +1,6 @@
 package woowatech.open_mission.Controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
 import woowatech.open_mission.Domain.Memoir;
@@ -17,27 +18,62 @@ public class MemoirController {
     }
 
     @GetMapping
-    public List<MemoirSummaryDto> getMemoirSummary() {
-        return memoirService.getMemoirSummary();
+    public ResponseEntity<?> getMemoirSummary() {
+        try {
+            List<MemoirSummaryDto> summary = memoirService.getMemoirSummary();
+            return ResponseEntity.ok(summary);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("회고록 목록 조회 중 오류가 발생했습니다.");
+        }
     }
 
     @GetMapping(params = "id")
-    public Memoir getMemoir(@RequestParam("id") Long memoirId) {
-        return memoirService.getMemoirById(memoirId);
+    public ResponseEntity<?> getMemoir(@RequestParam("id") Long memoirId) {
+        try {
+            Memoir memoir = memoirService.getMemoirById(memoirId);
+            return ResponseEntity.ok(memoir);
+        } catch (IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body(error.getMessage());
+        } catch (Exception error) {
+            return ResponseEntity.internalServerError().body("회고록 조회 중 오류가 발생했습니다.");
+        }
     }
 
+
     @PostMapping
-    public void saveMemoir(@RequestBody Memoir memoir) {
-        memoirService.saveMemoir(memoir);
+    public ResponseEntity<?> saveMemoir(@RequestBody Memoir memoir, @RequestHeader("user-id") Long userId) {
+        try {
+            memoirService.saveMemoir(memoir, userId);
+            return ResponseEntity.ok("회고록이 성공적으로 저장되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("회고록 저장 중 오류가 발생했습니다.");
+        }
     }
 
     @DeleteMapping(params = "id")
-    public void deleteMemoir(@RequestParam("id") Long memoirId) {
-        memoirService.deleteMemoir(memoirId);
+    public ResponseEntity<?> deleteMemoir(@RequestParam("id") Long memoirId,
+                                          @RequestHeader("user-id") Long userId) {
+        try {
+            memoirService.deleteMemoir(memoirId, userId);
+            return ResponseEntity.ok("회고록이 성공적으로 삭제되었습니다.");
+        } catch (IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body(error.getMessage());
+        } catch (Exception error) {
+            return ResponseEntity.internalServerError().body("회고록 삭제 중 오류가 발생했습니다.");
+        }
     }
 
     @PutMapping(params = "id")
-    public void updateMemoir(@RequestParam("id") Long memoirId, @RequestBody Memoir updateMemoir) {
-        memoirService.updateMemoir(memoirId, updateMemoir);
+    public ResponseEntity<?> updateMemoir(@RequestParam("id") Long memoirId,
+                                          @RequestHeader("user-id") Long userId,
+                                          @RequestBody Memoir updateMemoir) {
+        try {
+            memoirService.updateMemoir(memoirId, userId, updateMemoir);
+            return ResponseEntity.ok("회고록이 성공적으로 수정되었습니다.");
+        } catch (IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body(error.getMessage());
+        } catch (Exception error) {
+            return ResponseEntity.internalServerError().body("회고록 수정 중 오류가 발생했습니다.");
+        }
     }
 }
