@@ -8,16 +8,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import woowatech.open_mission.DTO.LoginRequestDto;
 import woowatech.open_mission.DTO.LoginResponseDto;
+import woowatech.open_mission.DTO.UserRequestDto;
 import woowatech.open_mission.Domain.User;
 import woowatech.open_mission.Repository.UserContainer;
 import woowatech.open_mission.exception.CustomException;
+import woowatech.open_mission.mapper.UserMapper;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserContainer userContainer;
+    private final UserMapper userMapper;
 
-    public void register(User user) {
+    public void register(UserRequestDto userRequestDto) {
+        User user = userMapper.toEntity(userRequestDto);
         if (!userContainer.findByUsername(user.getUsername()).isEmpty()) {
             throw new CustomException(DUPLICATE_USERNAME);
         }
