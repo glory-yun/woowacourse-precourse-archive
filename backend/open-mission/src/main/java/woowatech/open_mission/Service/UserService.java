@@ -5,7 +5,6 @@ import static woowatech.open_mission.exception.ErrorCode.INVALID_PASSWORD;
 import static woowatech.open_mission.exception.ErrorCode.USERNAME_NOT_FOUND;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import woowatech.open_mission.DTO.LoginRequestDto;
 import woowatech.open_mission.DTO.LoginResponseDto;
@@ -13,7 +12,6 @@ import woowatech.open_mission.Domain.User;
 import woowatech.open_mission.Repository.UserContainer;
 import woowatech.open_mission.exception.CustomException;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
