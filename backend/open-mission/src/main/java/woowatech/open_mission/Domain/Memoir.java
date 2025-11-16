@@ -31,4 +31,10 @@ public class Memoir {
 
     @Column(nullable = false)
     private Long userId;
+
+    public void updateMemoir(String title, Date date, Contents contents) {
+        this.title = title;
+        this.date = date;
+        this.contents = contents;
+    }
 }

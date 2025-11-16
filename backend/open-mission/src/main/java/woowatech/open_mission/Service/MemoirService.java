@@ -72,8 +72,8 @@ public class MemoirService {
         Memoir memoir = memoirOpt.orElseThrow(() ->
                 new CustomException(FORBIDDEN));
 
-        memoir.setTitle(updateMemoir.getTitle());
-        memoir.setDate(updateMemoir.getDate());
-        memoir.setContents(updateMemoir.getContents());
+        memoir.updateMemoir(updateMemoir.getTitle(),
+                            updateMemoir.getDate(),
+                            updateMemoir.getContents());
     }
 }
