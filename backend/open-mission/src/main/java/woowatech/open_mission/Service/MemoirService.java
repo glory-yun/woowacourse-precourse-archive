@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+import woowatech.open_mission.DTO.MemoirRequestDto;
+import woowatech.open_mission.DTO.MemoirResponseDto;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
 import woowatech.open_mission.Domain.Memoir;
 import woowatech.open_mission.Domain.User;
@@ -18,12 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import woowatech.open_mission.exception.CustomException;
+import woowatech.open_mission.mapper.MemoirMapper;
 
 @Service
 @RequiredArgsConstructor
 public class MemoirService {
     private final MemoirContainer memoirContainer;
     private final UserContainer userContainer;
+    private final MemoirMapper memoirMapper;
 
     //summary를 추출하는 함수
     private List<MemoirSummaryDto> getSummaries(List<Memoir> memoirList) {
@@ -48,12 +52,14 @@ public class MemoirService {
         return getSummaries(memoirList);
     }
 
-    public Memoir getMemoirById(Long memoirId) {
-        Optional<Memoir> memoir = memoirContainer.findById(memoirId);
-        return memoir.orElseThrow(() -> new CustomException(MEMOIR_NOT_FOUND));
+    public MemoirResponseDto getMemoirById(Long memoirId) {
+        Memoir memoir = memoirContainer.findById(memoirId).orElseThrow(() ->
+                new CustomException(MEMOIR_NOT_FOUND));
+        return memoirMapper.toDto(memoir);
     }
 
-    public void saveMemoir(Memoir memoir, Long userId) {
+    public void saveMemoir(MemoirRequestDto memoirRequestDto, Long userId) {
+        Memoir memoir = memoirMapper.toEntity(memoirRequestDto);
         memoir.setUserId(userId);
         memoirContainer.save(memoir);
     }
@@ -67,13 +73,12 @@ public class MemoirService {
     }
 
     @Transactional
-    public void updateMemoir(Long memoirId, Long userId, Memoir updateMemoir) {
-        Optional<Memoir> memoirOpt = memoirContainer.findByIdAndUserId(memoirId, userId);
-        Memoir memoir = memoirOpt.orElseThrow(() ->
+    public void updateMemoir(Long memoirId, Long userId, MemoirRequestDto updateMemoir) {
+        Memoir memoir = memoirContainer.findByIdAndUserId(memoirId, userId).orElseThrow(() ->
                 new CustomException(FORBIDDEN));
 
-        memoir.updateMemoir(updateMemoir.getTitle(),
-                            updateMemoir.getDate(),
-                            updateMemoir.getContents());
+        memoir.updateMemoir(updateMemoir.title(),
+                            updateMemoir.date(),
+                            memoirMapper.toEntity(updateMemoir.contents()));
     }
 }

@@ -3,8 +3,9 @@ package woowatech.open_mission.Controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import woowatech.open_mission.DTO.MemoirRequestDto;
+import woowatech.open_mission.DTO.MemoirResponseDto;
 import woowatech.open_mission.DTO.MemoirSummaryDto;
-import woowatech.open_mission.Domain.Memoir;
 import woowatech.open_mission.Service.MemoirService;
 
 import java.util.List;
@@ -23,13 +24,13 @@ public class MemoirController {
 
     @GetMapping(params = "id")
     public ResponseEntity<?> getMemoir(@RequestParam("id") Long memoirId) {
-        Memoir memoir = memoirService.getMemoirById(memoirId);
+        MemoirResponseDto memoir = memoirService.getMemoirById(memoirId);
         return ResponseEntity.ok(memoir);
     }
 
 
     @PostMapping
-    public ResponseEntity<?> saveMemoir(@RequestBody Memoir memoir, @RequestHeader("user-id") Long userId) {
+    public ResponseEntity<?> saveMemoir(@RequestBody MemoirRequestDto memoir, @RequestHeader("user-id") Long userId) {
         memoirService.saveMemoir(memoir, userId);
         return ResponseEntity.ok("회고록이 성공적으로 저장되었습니다.");
     }
@@ -45,7 +46,7 @@ public class MemoirController {
     @PutMapping(params = "id")
     public ResponseEntity<?> updateMemoir(@RequestParam("id") Long memoirId,
                                           @RequestHeader("user-id") Long userId,
-                                          @RequestBody Memoir updateMemoir) {
+                                          @RequestBody MemoirRequestDto updateMemoir) {
         memoirService.updateMemoir(memoirId, userId, updateMemoir);
         return ResponseEntity.ok("회고록이 성공적으로 수정되었습니다.");
     }
