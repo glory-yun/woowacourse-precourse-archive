@@ -1,5 +1,8 @@
 package woowatech.open_mission.Service;
 
+import static woowatech.open_mission.exception.ErrorCode.FORBIDDEN;
+import static woowatech.open_mission.exception.ErrorCode.MEMOIR_NOT_FOUND;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +15,7 @@ import woowatech.open_mission.Repository.UserContainer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import woowatech.open_mission.exception.CustomException;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +47,7 @@ public class MemoirService {
 
     public Memoir getMemoirById(Long memoirId) {
         Optional<Memoir> memoir = memoirContainer.findById(memoirId);
-        return memoir.orElseThrow(() -> new IllegalArgumentException("해당 회고록을 찾을 수 없습니다."));
+        return memoir.orElseThrow(() -> new CustomException(MEMOIR_NOT_FOUND));
     }
 
     public void saveMemoir(Memoir memoir, Long userId) {
@@ -54,7 +58,7 @@ public class MemoirService {
     public void deleteMemoir(Long memoirId, Long userId) {
         Optional<Memoir> memoirOpt = memoirContainer.findByIdAndUserId(memoirId, userId);
         Memoir memoir = memoirOpt.orElseThrow(() ->
-                new IllegalArgumentException("삭제할  권한이 없습니다."));
+                new CustomException(FORBIDDEN));
 
         memoirContainer.delete(memoir);
     }
@@ -62,7 +66,7 @@ public class MemoirService {
     public void updateMemoir(Long memoirId, Long userId, Memoir updateMemoir) {
         Optional<Memoir> memoirOpt = memoirContainer.findByIdAndUserId(memoirId, userId);
         Memoir memoir = memoirOpt.orElseThrow(() ->
-                new IllegalArgumentException("수정할 권한이 없습니다."));
+                new CustomException(FORBIDDEN));
 
         memoir.setTitle(updateMemoir.getTitle());
         memoir.setDate(updateMemoir.getDate());

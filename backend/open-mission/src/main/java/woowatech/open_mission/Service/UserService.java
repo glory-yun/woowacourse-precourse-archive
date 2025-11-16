@@ -1,12 +1,19 @@
 package woowatech.open_mission.Service;
 
+import static woowatech.open_mission.exception.ErrorCode.DUPLICATE_USERNAME;
+import static woowatech.open_mission.exception.ErrorCode.INVALID_PASSWORD;
+import static woowatech.open_mission.exception.ErrorCode.USERNAME_NOT_FOUND;
+
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import woowatech.open_mission.DTO.LoginRequestDto;
 import woowatech.open_mission.DTO.LoginResponseDto;
 import woowatech.open_mission.Domain.User;
 import woowatech.open_mission.Repository.UserContainer;
+import woowatech.open_mission.exception.CustomException;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -14,7 +21,7 @@ public class UserService {
 
     public void register(User user) {
         if (userContainer.findByUsername(user.getUsername()) != null) {
-            throw new IllegalArgumentException("이미 존재하는 사용자 이름입니다.");
+            throw new CustomException(DUPLICATE_USERNAME);
         }
         userContainer.save(user);
     }
@@ -25,10 +32,10 @@ public class UserService {
         User user = userContainer.findByUsername(username);
 
         if(user == null){
-            throw new IllegalArgumentException("존재하지 않는 사용자입니다.");
+            throw new CustomException(USERNAME_NOT_FOUND);
         }
         if(!user.getPassword().equals(password)){
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new CustomException(INVALID_PASSWORD);
         }
 
         return new LoginResponseDto(user.getUserId(), user.getUsername());
