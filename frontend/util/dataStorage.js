@@ -1,4 +1,4 @@
-export function saveUser({ userId, username }) {
+export function storeUser({ userId, username }) {
   localStorage.setItem("userId", userId);
   localStorage.setItem("username", username);
 }

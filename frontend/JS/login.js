@@ -1,17 +1,18 @@
 import { getUser } from "../API/getUserApi.js";
 import { redirectToMemoirList } from "../util/route.js";
-import { saveUser } from "../API/getUserApi.js";
+import { storeUser } from "../util/dataStorage.js"
 
-const loginForm = document.querySelector("#loginForm");
 loginForm.addEventListener("submit", handleLogin);
 
 async function handleLogin(event) {
   event.preventDefault();
 
-  const formData = new FormData(loginForm);
-  const loginDto = Object.fromEntries(formData.entries());
+  const loginDto = {
+    username: loginForm.querySelector("#username").value,
+    password: loginForm.querySelector("#password").value,
+  };
 
   const user = await getUser(loginDto);
-  saveUser(user);
+  storeUser(user);
   redirectToMemoirList();
 }
