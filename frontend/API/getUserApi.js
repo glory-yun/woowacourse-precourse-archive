@@ -4,20 +4,20 @@ const userUrl = new URL(USER_API_URL);
 
 
 //  공통 fetch 함수
-async function request(endpoint, body, errorMessage) {
+async function request(endpoint, user, errorMessage) {
   try {
     const response = await fetch(`${userUrl}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(user),
     });
 
     if (!response.ok) {
       throw new Error(errorMessage);
     }
-    return response.status !== 204 ? await response.json() : null;
+    return response;
   } catch (error) {
     alert(error.message);
     throw error;
