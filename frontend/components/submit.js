@@ -47,10 +47,10 @@ function loadForm() {
     `
 
     const plusBtn = document.querySelector(".plus-btn");
-    plusBtn.addEventListener("click", 함수이름미정);
+    plusBtn.addEventListener("click", addSubContent);
 }
 
-function 함수이름미정() {
+function addSubContent() {
     const content = document.querySelector("#content");
 
     const wrapper = document.createElement("div");

@@ -52,13 +52,13 @@ function loadForm() {
     </div>
     `
 
-    addSubContent()
+    addSubContents()
 
     const plusBtn = document.querySelector(".plus-btn");
-    plusBtn.addEventListener("click", 함수이름미정);
+    plusBtn.addEventListener("click", addSubContent);
 }
 
-function addSubContent() {
+function addSubContents() {
     const content = document.querySelector("#content");
 
     sections.slice(3).forEach(element => {
@@ -92,7 +92,7 @@ function addSubContent() {
     content.addEventListener("click", deleteSub)
 }
 
-function 함수이름미정() {
+function addSubContent() {
     const content = document.querySelector("#content");
 
     const wrapper = document.createElement("div");
