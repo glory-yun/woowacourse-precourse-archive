@@ -2,6 +2,7 @@ package woowatech.open_mission.Service;
 
 import static woowatech.open_mission.exception.ErrorCode.FORBIDDEN;
 import static woowatech.open_mission.exception.ErrorCode.MEMOIR_NOT_FOUND;
+import static woowatech.open_mission.exception.ErrorCode.USERNAME_NOT_FOUND;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class MemoirService {
         List<MemoirSummaryDto> summary = new ArrayList<>();
 
         for (Memoir memoir : memoirList) {
-            User user = userContainer.findByUserId(memoir.getUserId());
+            User user = userContainer.findByUserId(memoir.getUserId()).orElseThrow(
+                    () -> new CustomException(USERNAME_NOT_FOUND));
             summary.add(new MemoirSummaryDto(memoir.getId(), memoir.getTitle(), memoir.getDate(), user.getUsername()));
         }
         return summary;
