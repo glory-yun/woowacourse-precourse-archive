@@ -1,4 +1,5 @@
 import { getMomoirDetail, deleteMemoir } from "../API/getMemoirApi.js"
+import { BASE_URL } from "../config.js"
 
 window.addEventListener("load", getDetail)
 

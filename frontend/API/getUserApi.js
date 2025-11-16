@@ -17,7 +17,7 @@ async function request(endpoint, user, errorMessage) {
     if (!response.ok) {
       throw new Error(errorMessage);
     }
-    return response;
+    return response.json();
   } catch (error) {
     alert(error.message);
     throw error;

@@ -13,7 +13,7 @@ export default function Navbar() {
 
         <!-- 오른쪽 메뉴들 -->
         <div class="d-flex align-items-center gap-3">
-          <a href="submit.html" class="btn btn-primary">새 회고 작성</a>
+          <a href="memoirWrite.html" class="btn btn-primary">새 회고 작성</a>
         </div>
       </div>
     </ >

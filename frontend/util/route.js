@@ -20,8 +20,13 @@ export function redirectToLogin() {
   redirectTo(LOGIN_URL, "login.html");
 }
 
+export function redirectToMemoirDetailAfterSave() {
+  redirectTo(BASE_URL, "memoirList.html");
+}
 
 //params를 사용한 redirect
 export function redirectToMemoirDetail(id) {
   redirecToWithParam(id, "memoirDetail.html");
 }
+
+

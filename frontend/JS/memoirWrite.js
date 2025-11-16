@@ -1,5 +1,4 @@
 import { saveMemoir } from "../API/getMemoirApi.js";
-import { BASE_URL } from "../config.js";
 import { getDate } from "../util/getDate.js";
 import { collectSections } from "./memoirSectionHandler.js";
 import { redirectToMemoirDetailAfterSave } from "../util/route.js";
@@ -7,8 +6,8 @@ import { redirectToMemoirDetailAfterSave } from "../util/route.js";
 const writeFrm = document.querySelector("#writeFrm");
 writeFrm.addEventListener("submit", handleSubmit);
 
-async function handleSubmit(e) {
-  e.preventDefault();
+async function handleSubmit(event) {
+  event.preventDefault();
 
   const title = document.querySelector("#title").value;
   const sections = collectSections();
