@@ -17,7 +17,9 @@ async function request(endpoint, user, errorMessage) {
     if (!response.ok) {
       throw new Error(errorMessage);
     }
-    return response.json();
+    return response.headers.get("content-type")?.includes("application/json")
+      ? response.json()
+      : response.text();
   } catch (error) {
     alert(error.message);
     throw error;
