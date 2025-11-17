@@ -1,4 +1,4 @@
-import { MemoirSummaryCard } from "../Components/card..js";
+import { MemoirSummaryCard } from "../Components/card.js";
 import { getMemoirs } from "../API/getMemoirApi.js";
 import { redirectToMemoirDetail } from "../util/route.js";
 

@@ -1,5 +1,5 @@
 import { getMomoirDetail } from "../API/getMemoirApi.js"
-import { MemoirDetailCard } from "../Components/card..js";
+import { MemoirDetailCard } from "../Components/card.js";
 import { buttonSetting } from "./buttonSetting.js";
 
 window.addEventListener("load", showMemoirDetail)
