@@ -11,7 +11,7 @@ function makeCard(memoirDtoData) {
 
   const cardsHTML = memoirDtoData.map((data) => MemoirSummaryCard(data)).join("");
 
-  cardContainer.innerHTML = cardsHTML;
+  cardContainer.innerHTML = cardsHTML || "작성된 회고가 없습니다.";
 
   const cards = document.querySelectorAll('.card');
   cards.forEach((card) => {
