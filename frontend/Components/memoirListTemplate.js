@@ -3,6 +3,7 @@ import { redirectToMemoirDetail } from "../util/route.js";
 
 export async function getMemoirList(getMyMemoirs) {
   const memoirDtoData = await getMyMemoirs();
+  memoirDtoData.sort((a, b) => b.memoriId - a.memoriId);
   makeCard(memoirDtoData);
 }
 
