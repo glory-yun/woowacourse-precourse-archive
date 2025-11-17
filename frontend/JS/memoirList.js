@@ -1,4 +1,4 @@
-import { Card } from "../Components/card..js";
+import { MemoirSummaryCard } from "../Components/card..js";
 import { getMemoirs } from "../API/getMemoirApi.js";
 import { redirectToMemoirDetail } from "../util/route.js";
 
@@ -12,7 +12,7 @@ async function getMemoirList() {
 }
 
 function makeCard(memoirDtoData) {
-  const cardsHTML = memoirDtoData.map((data) => Card(data)).join("");
+  const cardsHTML = memoirDtoData.map((data) => MemoirSummaryCard(data)).join("");
 
   cardContainer.innerHTML = cardsHTML;
 

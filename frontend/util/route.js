@@ -29,4 +29,6 @@ export function redirectToMemoirDetail(id) {
   redirecToWithParam(id, "memoirDetail.html");
 }
 
-
+export function redirectToMemoirModify(id) {
+  redirecToWithParam(id, "memoirModify.html");
+}

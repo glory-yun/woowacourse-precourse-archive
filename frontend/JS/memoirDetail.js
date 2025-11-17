@@ -1,70 +1,24 @@
-import { getMomoirDetail, deleteMemoir } from "../API/getMemoirApi.js"
-import { BASE_URL } from "../config.js"
+import { getMomoirDetail } from "../API/getMemoirApi.js"
+import { MemoirDetailCard } from "../Components/card..js";
+import { buttonSetting } from "./buttonSetting.js";
 
-window.addEventListener("load", getDetail)
+window.addEventListener("load", showMemoirDetail)
 
-const url = new URL(window.location.href)
-const id = url.searchParams.get("id")
+async function showMemoirDetail() {
+  const memoirData = await getMomoirDetail();
 
-async function getDetail() {
-    const data = await getMomoirDetail(id)
-
-    const buttons = document.querySelector(".d-none")
-    if (data.userId == localStorage.getItem("userId")) {
-        buttons.classList.remove("d-none")
-    }
-
-    addCard(data.contents.sections)
-
-    const title = document.querySelector("#title")
-    const date = document.querySelector("#date")
-
-    title.innerHTML = data.title
-    date.innerHTML = data.date
+  buttonSetting(memoirData.id, memoirData.userId);
+  showHeaders(memoirData);
+  showCards(memoirData.contents.sections)
 }
 
-function addCard(sections) {
-    const cards = document.querySelector("#wrapper")
-    let card = ""
-    sections.forEach(element => {
-        const subTitle = element["subTitle"]
-        const description = element["description"]
-        card += `
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                <h5 class="fw-semibold mb-3">${subTitle}</h5>
-                <hr />
-                <p class="text-body">${description}</p>
-                </div>
-            </div>
-            `
-    });
-    cards.innerHTML = card
+function showCards(sections) {
+  const wrapper = document.querySelector("#wrapper");
+  const cardsHTML = sections.map(MemoirDetailCard).join("");
+  wrapper.innerHTML = cardsHTML;
 }
 
-const modifyBtn = document.querySelector("#modifyBtn")
-modifyBtn.addEventListener("click", getModify)
-
-function getModify() {
-    const url = new URL(`${BASE_URL}/memoirModify.html`)
-    const param = url.searchParams
-
-    param.append("id", id)
-
-    window.location.href = url
-}
-
-const deleteBtn = document.querySelector("#delete")
-deleteBtn.addEventListener("click", deletePost)
-
-async function deletePost(e) {
-    await deleteMemoir(id)
-    getMemoirs()
-}
-
-function getMemoirs() {
-    if (confirm('삭제했습니다')) {
-        const url = new URL(`${BASE_URL}/memoirList.html`)
-        window.location.href = url
-    }
+function showHeaders(data) {
+  document.querySelector("#title").textContent = data.title;
+  document.querySelector("#date").textContent = data.date;
 }

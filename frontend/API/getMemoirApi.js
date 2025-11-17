@@ -18,8 +18,10 @@ export async function getMyMemoirs() {
   return memoirs;
 }
 
-export async function getMomoirDetail(id) {
-  let urlParams = memoirUrl.searchParams;
+export async function getMomoirDetail() {
+  const nowUrl = new URL(window.location.href)
+  const id = nowUrl.searchParams.get("id")
+  const urlParams = memoirUrl.searchParams;
   urlParams.append("id", id)
 
   const response = await fetch(memoirUrl);
