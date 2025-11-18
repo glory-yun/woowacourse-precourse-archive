@@ -8,27 +8,28 @@ function redirectTo(url, path) {
 function redirecToWithParam(id, path) {
   const url = new URL(`${BASE_URL}/${path}`);
   url.searchParams.append("id", id);
-  window.location.href = url;
+
+  window.location.assign(url.toString());
 }
 
 //일반 redirect
 export function redirectToMemoirList() {
-  redirectTo(BASE_URL, "memoirList.html");
+  redirectTo(BASE_URL, "memoirList");
 }
 
 export function redirectToLogin() {
-  redirectTo(LOGIN_URL, "login.html");
+  redirectTo(LOGIN_URL, "login");
 }
 
 export function redirectToMemoirDetailAfterSave() {
-  redirectTo(BASE_URL, "memoirList.html");
+  redirectTo(BASE_URL, "memoirList");
 }
 
 //params를 사용한 redirect
 export function redirectToMemoirDetail(id) {
-  redirecToWithParam(id, "memoirDetail.html");
+  redirecToWithParam(id, "memoirDetail");
 }
 
 export function redirectToMemoirModify(id) {
-  redirecToWithParam(id, "memoirModify.html");
+  redirecToWithParam(id, "memoirModify");
 }
