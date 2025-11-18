@@ -19,7 +19,7 @@ public class Section {
     @Column
     private String subTitle;
 
-    @Column
     @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 }
