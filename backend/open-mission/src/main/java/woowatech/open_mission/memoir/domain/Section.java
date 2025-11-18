@@ -1,25 +1,25 @@
-package woowatech.open_mission.Domain;
+package woowatech.open_mission.memoir.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
     @Column
     private String subTitle;
 
-    @Column
     @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 }

@@ -1,11 +1,10 @@
-package woowatech.open_mission.Repository;
+package woowatech.open_mission.memoir.repository;
 
 import jakarta.transaction.Transactional;
-import org.hibernate.sql.model.jdbc.MergeOperation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
-import woowatech.open_mission.Domain.Memoir;
+import woowatech.open_mission.memoir.domain.Memoir;
 
 import java.util.List;
 import java.util.Optional;

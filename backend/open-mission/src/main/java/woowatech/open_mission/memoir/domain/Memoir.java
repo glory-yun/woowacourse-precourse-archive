@@ -1,7 +1,9 @@
-package woowatech.open_mission.Domain;
+package woowatech.open_mission.memoir.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +14,8 @@ import java.util.Date;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Memoir {
 
     @Id
@@ -31,4 +35,10 @@ public class Memoir {
 
     @Column(nullable = false)
     private Long userId;
+
+    public void updateMemoir(String title, Date date, Contents contents) {
+        this.title = title;
+        this.date = date;
+        this.contents = contents;
+    }
 }
