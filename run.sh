@@ -83,7 +83,7 @@ if [ -z "$JAR_FILE" ]; then
     exit 1
 fi
 
-echo "🚀 백엔드 실행 중..."
+echo "🚀 서버 실행 중..."
 # 백엔드를 백그라운드로 실행
 (java -jar "$JAR_FILE" >/dev/null 2>&1 &) &
 BACK_PID=$!
@@ -98,7 +98,7 @@ cd "$(dirname "$BASE_DIR")" || exit
 PORT=5500
 PROJECT_NAME=$(basename "$BASE_DIR")
 
-echo "🌍 프론트엔드 서버 실행 (포트 $PORT)..."
+echo "🌍로그인 페이지 로딩 중..."
 npx http-server "$FRONTEND_DIR" -p "$PORT" -c-1 --no-dotfiles --no-rewrite >/dev/null 2>&1 &
 FRONT_PID=$!
 sleep 5
@@ -108,21 +108,9 @@ sleep 5
 # [6] login.html 자동 열기
 # =============================
 URL="http://localhost:${PORT}/${PROJECT_NAME}/frontend/Pages/user/login.html"
-echo "🌐 브라우저 열기: $URL"
 
 if command -v python3 &> /dev/null; then
   python3 -m webbrowser "$URL"
 else
   open "$URL"
 fi
-
-echo ""
-echo "✅ 모든 서비스가 백그라운드에서 실행 중입니다!"
-echo "🧩 백엔드 PID: $BACK_PID"
-echo "🧩 프론트엔드 PID: $FRONT_PID"
-echo ""
-echo "💡 서버를 종료하려면 아래 명령어를 직접 실행하세요:"
-echo "   kill $BACK_PID $FRONT_PID"
-echo ""
-echo "🔥 또는 모든 Node/Java 프로세스를 종료하려면:"
-echo "   killall java node"
