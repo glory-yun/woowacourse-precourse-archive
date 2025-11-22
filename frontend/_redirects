@@ -1,0 +1,4 @@
+/user/signin  http://3.37.10.41:8080/signin   200
+/user/signup  http://3.37.10.41:8080/signup   200
+
+/memoir/*     http://3.37.10.41:8080/memoir/:splat  200
