@@ -1,12 +1,12 @@
 import { USER_API_URL } from "../config.js";
 
-const userUrl = new URL(USER_API_URL);
+const userUrl = USER_API_URL;
 
 
 //  공통 fetch 함수
 async function request(endpoint, user, errorMessage) {
   try {
-    const response = await fetch(`${userUrl}${endpoint}`, {
+    const response = await fetch(`${userUrl}/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
