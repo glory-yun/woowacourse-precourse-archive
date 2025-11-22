@@ -1,5 +1,5 @@
 import { MEMOIR_API_URL } from "../config.js";
-const memoirUrl = new URL(MEMOIR_API_URL)
+const memoirUrl = MEMOIR_API_URL;
 
 export async function getMemoirs() {
   const response = await fetch(memoirUrl);
