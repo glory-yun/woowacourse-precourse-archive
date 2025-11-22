@@ -19,14 +19,15 @@ export async function getMyMemoirs() {
 }
 
 export async function getMomoirDetail() {
-  const nowUrl = new URL(window.location.href)
-  const id = nowUrl.searchParams.get("id")
-  const urlParams = memoirUrl.searchParams;
-  urlParams.append("id", id)
+  const nowUrl = new URL(window.location.href);
+  const id = nowUrl.searchParams.get("id");
 
-  const response = await fetch(memoirUrl);
+  const response = await fetch(
+    `${memoirUrl}?id=${encodeURIComponent(id)}`
+  );
+
   const memoir = await response.json();
-  sessionStorage.setItem("memoir", JSON.stringify(memoir))
+  sessionStorage.setItem("memoir", JSON.stringify(memoir));
   return memoir;
 }
 
