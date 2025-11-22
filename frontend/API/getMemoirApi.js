@@ -1,5 +1,5 @@
 import { MEMOIR_API_URL } from "../config.js";
-const memoirUrl = new URL(MEMOIR_API_URL)
+const memoirUrl = MEMOIR_API_URL;
 
 export async function getMemoirs() {
   const response = await fetch(memoirUrl);
@@ -19,14 +19,15 @@ export async function getMyMemoirs() {
 }
 
 export async function getMomoirDetail() {
-  const nowUrl = new URL(window.location.href)
-  const id = nowUrl.searchParams.get("id")
-  const urlParams = memoirUrl.searchParams;
-  urlParams.append("id", id)
+  const nowUrl = new URL(window.location.href);
+  const id = nowUrl.searchParams.get("id");
 
-  const response = await fetch(memoirUrl);
+  const response = await fetch(
+    `${memoirUrl}?id=${encodeURIComponent(id)}`
+  );
+
   const memoir = await response.json();
-  sessionStorage.setItem("memoir", JSON.stringify(memoir))
+  sessionStorage.setItem("memoir", JSON.stringify(memoir));
   return memoir;
 }
 
@@ -47,27 +48,27 @@ export async function saveMemoir(memoir) {
 }
 
 export async function putMemoir(id, memoir) {
-  let urlParams = memoirUrl.searchParams
-  urlParams.append("id", id)
-
-  await fetch(memoirUrl, {
-    method: "PUT",
-    headers: {
-      'Content-Type': 'application/json',
-      'user-id': localStorage.getItem("userId")
-    },
-    body: JSON.stringify(memoir)
-  });
+  await fetch(
+    `${memoirUrl}?id=${encodeURIComponent(id)}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "user-id": localStorage.getItem("userId"),
+      },
+      body: JSON.stringify(memoir),
+    }
+  );
 }
 
 export async function deleteMemoir(id) {
-  let urlParams = memoirUrl.searchParams
-  urlParams.append("id", id)
-
-  await fetch(memoirUrl, {
-    method: "DELETE",
-    headers: {
-      'user-id': localStorage.getItem("userId")
+  await fetch(
+    `${memoirUrl}?id=${encodeURIComponent(id)}`,
+    {
+      method: "DELETE",
+      headers: {
+        "user-id": localStorage.getItem("userId"),
+      },
     }
-  });
+  );
 }

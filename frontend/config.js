@@ -1,13 +1,10 @@
-let FRONTEND_ROOT = "";
-const { origin, pathname } = window.location;
+const { origin } = window.location;
+const PAGES_ROOT = `${origin}/Pages`;
 
-const parts = pathname.split("/");
-parts.pop();
-FRONTEND_ROOT = `${origin}${parts.join("/")}`;
+export const BASE_URL = `${PAGES_ROOT}/memoir`;
+export const LOGIN_URL = `${PAGES_ROOT}/user`;
 
-export const BASE_URL = `${FRONTEND_ROOT}/../memoir`;
-export const LOGIN_URL = `${FRONTEND_ROOT}/../user`;
+export const API_ROOT = "/";
 
-//API URL
-export const USER_API_URL = "http://localhost:8080";
-export const MEMOIR_API_URL = "http://localhost:8080/memoir";
+export const USER_API_URL = `${API_ROOT}user`;
+export const MEMOIR_API_URL = `${API_ROOT}memoir`; 
