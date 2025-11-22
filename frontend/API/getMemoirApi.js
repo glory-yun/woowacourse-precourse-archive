@@ -48,27 +48,27 @@ export async function saveMemoir(memoir) {
 }
 
 export async function putMemoir(id, memoir) {
-  let urlParams = memoirUrl.searchParams
-  urlParams.append("id", id)
-
-  await fetch(memoirUrl, {
-    method: "PUT",
-    headers: {
-      'Content-Type': 'application/json',
-      'user-id': localStorage.getItem("userId")
-    },
-    body: JSON.stringify(memoir)
-  });
+  await fetch(
+    `${memoirUrl}?id=${encodeURIComponent(id)}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "user-id": localStorage.getItem("userId"),
+      },
+      body: JSON.stringify(memoir),
+    }
+  );
 }
 
 export async function deleteMemoir(id) {
-  let urlParams = memoirUrl.searchParams
-  urlParams.append("id", id)
-
-  await fetch(memoirUrl, {
-    method: "DELETE",
-    headers: {
-      'user-id': localStorage.getItem("userId")
+  await fetch(
+    `${memoirUrl}?id=${encodeURIComponent(id)}`,
+    {
+      method: "DELETE",
+      headers: {
+        "user-id": localStorage.getItem("userId"),
+      },
     }
-  });
+  );
 }
