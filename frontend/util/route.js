@@ -2,11 +2,11 @@ import { BASE_URL, LOGIN_URL, } from "../config.js";
 ;
 
 function redirectTo(url, path) {
-  window.location.href = `${url}/${path}`;
+  window.location.href = `${url}/${path}.html`;
 }
 
 function redirecToWithParam(id, path) {
-  const url = new URL(`${BASE_URL}/${path}`);
+  const url = new URL(`${BASE_URL}/${path}.html`);
   url.searchParams.append("id", id);
 
   window.location.assign(url.toString());
